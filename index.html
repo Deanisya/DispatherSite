@@ -1,0 +1,2986 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ДомДиспетчер — диспетчеризация заявок для УК</title>
+    <meta
+      name="description"
+      content="Платформа управления зданиями и заявками с AI-ботом в MAX. Заявки из чатов жителей — на доску заявок диспетчера автоматически."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="public/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/cabinet.css" />
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="ДомДиспетчер">
+          <span class="brand__mark" aria-hidden="true">
+            <img src="public/favicon.svg" width="36" height="36" alt="" />
+          </span>
+          <span class="brand__text">Дом<span>Диспетчер</span></span>
+        </a>
+
+        <nav class="nav" id="nav" aria-label="Основная навигация">
+          <a href="#features">Возможности</a>
+          <a href="#demo">Демо</a>
+          <a href="#how">Как работает</a>
+          <a href="#pricing">Тарифы</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+
+        <div class="header-actions">
+          <button type="button" class="btn btn--primary" data-lead-open data-tariff="trial">
+            Попробовать
+          </button>
+          <button
+            class="nav-toggle"
+            id="navToggle"
+            type="button"
+            aria-label="Меню"
+            aria-expanded="false"
+          >
+            <span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero__glow" aria-hidden="true"></div>
+        <div class="hero-wave" aria-hidden="true">
+          <svg
+            class="hero-wave__svg"
+            viewBox="0 0 1200 400"
+            preserveAspectRatio="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              class="hero-wave__fill"
+              d="M0 220 C150 140 300 300 450 220 S750 140 900 220 S1050 300 1200 220 V400 H0 Z"
+            />
+            <path
+              id="heroWavePath"
+              class="hero-wave__line"
+              fill="none"
+              d="M0 220 C150 140 300 300 450 220 S750 140 900 220 S1050 300 1200 220"
+            />
+          </svg>
+          <span class="hero-wave__ball" id="heroWaveBall"></span>
+        </div>
+        <div class="container hero__grid">
+          <div class="hero__copy">
+            <p class="hero__brand">AI-бот в MAX</p>
+            <h1>Заявки из чатов жителей — сразу на доску диспетчера</h1>
+            <p class="hero__lead">
+              AI в MAX распознаёт проблему, создаёт заявку и отвечает жителю. Диспетчер управляет
+              статусами, приоритетами и исполнителями в одном окне.
+            </p>
+            <div class="hero__cta">
+              <a class="btn btn--primary btn--lg" href="#demo">Смотреть демо</a>
+              <a
+                class="btn btn--outline btn--lg"
+                href="https://domcrm.tech"
+                target="_blank"
+                rel="noopener"
+                >Открыть кабинет</a
+              >
+            </div>
+          </div>
+
+          <div class="hero__visual" aria-hidden="true">
+            <div class="hero-stats-tilt" id="heroStatsTilt">
+              <div class="hero-stats">
+                <div class="hero-stats__bar">
+                  <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                  <span class="hero-stats__title">Сегодня · в реальном времени</span>
+                  <span class="hero-stats__live"><i></i> online</span>
+                </div>
+
+                <div class="hero-stats__kpis">
+                  <div class="hero-kpi">
+                    <span class="hero-kpi__label">Закрыто</span>
+                    <strong class="hero-kpi__value"
+                      ><span data-count="47" data-suffix="">0</span></strong
+                    >
+                    <span class="hero-kpi__hint hero-kpi__hint--up">+12% к вчера</span>
+                  </div>
+                  <div class="hero-kpi">
+                    <span class="hero-kpi__label">Ответ AI</span>
+                    <strong class="hero-kpi__value"
+                      ><span data-count="5" data-suffix="с">0</span></strong
+                    >
+                    <span class="hero-kpi__hint">среднее время</span>
+                  </div>
+                  <div class="hero-kpi">
+                    <span class="hero-kpi__label">Из MAX</span>
+                    <strong class="hero-kpi__value"
+                      ><span data-count="92" data-suffix="%">0</span></strong
+                    >
+                    <span class="hero-kpi__hint">автосоздание</span>
+                  </div>
+                </div>
+
+                <div class="hero-stats__chart">
+                  <div class="hero-chart__head">
+                    <span>Заявки за неделю</span>
+                    <span>Пн–Вс</span>
+                  </div>
+                  <div class="hero-chart__wave">
+                    <svg
+                      class="hero-chart__svg"
+                      viewBox="-6 0 372 120"
+                      preserveAspectRatio="none"
+                      aria-hidden="true"
+                    >
+                      <defs>
+                        <linearGradient
+                          id="heroWaveFill"
+                          gradientUnits="userSpaceOnUse"
+                          x1="0"
+                          y1="28"
+                          x2="0"
+                          y2="120"
+                        >
+                          <stop offset="0%" stop-color="#5e84f6" stop-opacity="0.26" />
+                          <stop offset="100%" stop-color="#5e84f6" stop-opacity="0" />
+                        </linearGradient>
+                      </defs>
+                      <path
+                        class="hero-chart__area"
+                        d="M0 120 V72 C30 72 42 40 60 38 C90 35 102 78 132 74 C162 70 174 28 204 32 C234 36 246 70 276 64 C306 58 324 30 360 36 V120 Z"
+                      />
+                      <path
+                        id="heroChartLine"
+                        class="hero-chart__line"
+                        fill="none"
+                        d="M0 72 C30 72 42 40 60 38 C90 35 102 78 132 74 C162 70 174 28 204 32 C234 36 246 70 276 64 C306 58 324 30 360 36"
+                      />
+                    </svg>
+                    <span class="hero-chart__dot" id="heroChartDot"></span>
+                    <div class="hero-chart__labels">
+                      <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span
+                      ><span>Сб</span><span>Вс</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="hero-stats__feed">
+                  <span class="hero-stats__feed-dot"></span>
+                  <span class="hero-stats__feed-text">Новая из MAX · #10271 · протечка</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURES -->
+      <section class="section" id="features">
+        <div class="container">
+          <header class="section-head">
+            <h2>Все заявки УК — в одном месте</h2>
+            <p class="section-lead">
+              От сообщения в чате до закрытой заявки — без ручного переноса и потерянных обращений.
+            </p>
+          </header>
+
+          <div class="feature-grid">
+            <article class="feature">
+              <div class="feature__icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M4 6h16v12H4V6Zm2 2v2h3V8H6Zm5 0v2h7V8h-7Zm-5 4v2h5v-2H6Zm7 0v2h5v-2h-5Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <h3>Канбан заявок</h3>
+              <p>Статусы, приоритеты, дубли и критичные обращения — на одной доске.</p>
+            </article>
+            <article class="feature">
+              <div class="feature__icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm1 4v5.2l3.5 2.1-.8 1.3L11 13V7h2Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <h3>AI-бот в MAX</h3>
+              <p>Классифицирует проблему, создаёт заявку и отвечает жителю номером обращения.</p>
+            </article>
+            <article class="feature">
+              <div class="feature__icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M4 20V9.5L12 4l8 5.5V20h-5v-5H9v5H4Z" fill="currentColor" />
+                </svg>
+              </div>
+              <h3>Дома и чаты</h3>
+              <p>Привязка групповых чатов MAX к домам — сообщения не теряются между объектами.</p>
+            </article>
+            <article class="feature">
+              <div class="feature__icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M5 19V5h2v14H5Zm4-8h10v2H9v-2Zm0-5h10v2H9V6Zm0 10h7v2H9v-2Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <h3>FAQ для бота</h3>
+              <p>
+                База типовых ответов: бот закрывает рутину, диспетчер работает с реальными
+                проблемами.
+              </p>
+            </article>
+            <article class="feature">
+              <div class="feature__icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M7 4h10a2 2 0 0 1 2 2v14l-7-3-7 3V6a2 2 0 0 1 2-2Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <h3>Задачи и календарь</h3>
+              <p>Внутренние задачи команды рядом с заявками — планирование без таблиц в Excel.</p>
+            </article>
+            <article class="feature">
+              <div class="feature__icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M4 18V6h2v12H4Zm4-7h3v7H8v-7Zm5-4h3v11h-3V7Zm5 2h3v9h-3V9Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <h3>Аналитика</h3>
+              <p>Динамика входящих и закрытых заявок по домам и периодам.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- INTERACTIVE DEMO -->
+      <section class="section section--demo" id="demo">
+        <div class="container container--wide">
+          <header class="section-head">
+            <h2>Кабинет администратора УК</h2>
+            <p class="section-lead">
+              Наведите на превью и откройте кабинет на весь экран — разделы, заявки и чаты как в
+              продукте.
+            </p>
+          </header>
+
+          <div class="demo-frame" id="demoFrame">
+            <div
+              class="cabinet-demo"
+              id="cabinetDemo"
+              aria-label="Демо кабинета администратора ДомДиспетчер"
+            >
+              <div class="app-shell">
+                <aside class="app-sidebar">
+                  <div class="app-sidebar__brand">
+                    <span class="app-sidebar__logo" aria-hidden="true">
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M4 20V9.5L12 4l8 5.5V20h-5v-5H9v5H4Z" />
+                      </svg>
+                    </span>
+                    <div class="app-sidebar__title">
+                      <div>Дом<span class="app-sidebar__title-accent">Диспетчер</span></div>
+                      <span class="app-sidebar__demo-badge">Full access</span>
+                    </div>
+                  </div>
+
+                  <nav class="app-sidebar__nav" id="cabinetNav" aria-label="Разделы кабинета">
+                    <div class="app-sidebar__section">
+                      <p class="app-sidebar__section-title">Рабочая область</p>
+                      <button
+                        type="button"
+                        class="app-sidebar__link app-sidebar__link--active"
+                        data-screen="dashboard"
+                      >
+                        <span class="app-sidebar__link-icon"
+                          ><svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                              d="M4 4h7v7H4V4Zm9 0h7v5h-7V4ZM4 13h7v7H4v-7Zm9-2h7v9h-7v-9Z"
+                            /></svg
+                        ></span>
+                        <span class="app-sidebar__link-label">Дашборд</span>
+                      </button>
+                      <button type="button" class="app-sidebar__link" data-screen="requests">
+                        <span class="app-sidebar__link-icon"
+                          ><svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M6 4h12a2 2 0 0 1 2 2v14l-8-3.5L4 20V6a2 2 0 0 1 2-2Z" /></svg
+                        ></span>
+                        <span class="app-sidebar__link-label">Заявки</span>
+                      </button>
+                      <button type="button" class="app-sidebar__link" data-screen="chats">
+                        <span class="app-sidebar__link-icon"
+                          ><svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M4 5h16v10H8l-4 4V5Z" /></svg
+                        ></span>
+                        <span class="app-sidebar__link-label">Чаты</span>
+                      </button>
+                      <button type="button" class="app-sidebar__link" data-screen="buildings">
+                        <span class="app-sidebar__link-icon"
+                          ><svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M4 20V9.5L12 4l8 5.5V20h-5v-5H9v5H4Z" /></svg
+                        ></span>
+                        <span class="app-sidebar__link-label">Дома</span>
+                      </button>
+                      <button type="button" class="app-sidebar__link" data-screen="faq">
+                        <span class="app-sidebar__link-icon"
+                          ><svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                              d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm-1 13h2v2h-2v-2Zm2.2-3.1-.9.5V15h-2v-1.8l1.8-1c.5-.3.8-.7.8-1.2 0-.8-.6-1.4-1.5-1.4S9.8 9.4 9.8 10H8c0-1.8 1.4-3 3.4-3S14.8 8.2 14.8 10c0 1.1-.5 1.9-1.6 2.9Z"
+                            /></svg
+                        ></span>
+                        <span class="app-sidebar__link-label">Общие вопросы (FAQ)</span>
+                      </button>
+                      <button type="button" class="app-sidebar__link" data-screen="staff">
+                        <span class="app-sidebar__link-icon"
+                          ><svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                              d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm-8 8a8 8 0 0 1 16 0H4Z"
+                            /></svg
+                        ></span>
+                        <span class="app-sidebar__link-label">Сотрудники</span>
+                      </button>
+                    </div>
+                    <div class="app-sidebar__section">
+                      <p class="app-sidebar__section-title">Планирование</p>
+                      <button type="button" class="app-sidebar__link" data-screen="calendar">
+                        <span class="app-sidebar__link-icon"
+                          ><svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M7 3h2v2h6V3h2v2h3v16H4V5h3V3Zm11 8H6v8h12v-8Z" /></svg
+                        ></span>
+                        <span class="app-sidebar__link-label">Календарь</span>
+                      </button>
+                      <button type="button" class="app-sidebar__link" data-screen="tasks">
+                        <span class="app-sidebar__link-icon"
+                          ><svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2Z" /></svg
+                        ></span>
+                        <span class="app-sidebar__link-label">Задачи</span>
+                      </button>
+                      <button type="button" class="app-sidebar__link" data-screen="analytics">
+                        <span class="app-sidebar__link-icon"
+                          ><svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                              d="M4 19h16v2H4v-2Zm2-3h3v-7H6v7Zm5 0h3V5h-3v11Zm5 0h3v-4h-3v4Z"
+                            /></svg
+                        ></span>
+                        <span class="app-sidebar__link-label">Аналитика</span>
+                      </button>
+                    </div>
+                    <div class="app-sidebar__section">
+                      <p class="app-sidebar__section-title">Система</p>
+                      <button type="button" class="app-sidebar__link" data-screen="documents">
+                        <span class="app-sidebar__link-icon"
+                          ><svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M6 2h9l5 5v15H6V2Zm8 1.5V8h4.5L14 3.5Z" /></svg
+                        ></span>
+                        <span class="app-sidebar__link-label">Документы</span>
+                      </button>
+                      <button type="button" class="app-sidebar__link" data-screen="tariffs">
+                        <span class="app-sidebar__link-icon"
+                          ><svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                              d="M7 4h8a4 4 0 0 1 0 8H9v2h5v2H9v4H7v-4H5v-2h2v-2H5V4h2Zm2 2v4h6a2 2 0 0 0 0-4H9Z"
+                            /></svg
+                        ></span>
+                        <span class="app-sidebar__link-label">Тарифы</span>
+                      </button>
+                    </div>
+                  </nav>
+
+                  <div class="app-sidebar__footer">
+                    <span class="hd-avatar" aria-hidden="true">
+                      <span class="hd-avatar__circle">А</span>
+                      <span class="hd-avatar__presence"></span>
+                    </span>
+                    <div>
+                      <div class="app-sidebar__footer-name">Админ УК</div>
+                      <div class="app-sidebar__footer-role">Администратор</div>
+                    </div>
+                  </div>
+                </aside>
+
+                <div class="app-shell__main">
+                  <header class="app-topbar">
+                    <div>
+                      <h3 class="app-topbar__title" id="pageTitle">Дашборд</h3>
+                      <p class="app-topbar__subtitle" id="pageSub">Обзор по всем объектам</p>
+                    </div>
+                    <div class="app-topbar__spacer"></div>
+                    <div class="app-topbar__ai">
+                      <span class="app-topbar__ai-dot"></span> AI активен
+                    </div>
+                  </header>
+
+                  <div class="app-shell__content">
+                    <!-- Requests -->
+                    <div class="page requests-page" data-screen-panel="requests">
+                      <div class="requests-filters">
+                        <div class="hd-search">
+                          <span class="hd-search__icon" aria-hidden="true">
+                            <svg
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                            >
+                              <circle cx="11" cy="11" r="7" />
+                              <path d="M20 20l-3.5-3.5" />
+                            </svg>
+                          </span>
+                          <span class="hd-search__placeholder"
+                            >Поиск по заявкам, жителям, тегам…</span
+                          >
+                        </div>
+                        <div class="hd-select-mock">Все дома</div>
+                        <div class="hd-select-mock">Все статусы</div>
+                        <div class="hd-select-mock">Все исполнители</div>
+                        <div class="hd-select-mock">Все даты</div>
+                        <div class="requests-filters__spacer"></div>
+                        <span class="hd-btn">+ Новая заявка</span>
+                      </div>
+
+                      <div class="requests-tabs">
+                        <div class="hd-tabs" id="prioTabs" role="tablist">
+                          <button
+                            type="button"
+                            class="hd-tabs__tab hd-tabs__tab--active"
+                            data-prio="all"
+                          >
+                            Все <span class="hd-tabs__count" id="prioAll">0</span>
+                          </button>
+                          <button
+                            type="button"
+                            class="hd-tabs__tab hd-tabs__tab--error"
+                            data-prio="critical"
+                          >
+                            Критичные <span class="hd-tabs__count" id="prioCritical">0</span>
+                          </button>
+                          <button
+                            type="button"
+                            class="hd-tabs__tab hd-tabs__tab--warning"
+                            data-prio="high"
+                          >
+                            Высокий <span class="hd-tabs__count" id="prioHigh">0</span>
+                          </button>
+                          <button
+                            type="button"
+                            class="hd-tabs__tab hd-tabs__tab--brand"
+                            data-prio="medium"
+                          >
+                            Средний <span class="hd-tabs__count" id="prioMedium">0</span>
+                          </button>
+                          <button
+                            type="button"
+                            class="hd-tabs__tab hd-tabs__tab--neutral"
+                            data-prio="low"
+                          >
+                            Низкий <span class="hd-tabs__count" id="prioLow">0</span>
+                          </button>
+                        </div>
+                        <div class="requests-filters__spacer"></div>
+                        <div class="hd-tabs" id="viewTabs" role="tablist">
+                          <button
+                            type="button"
+                            class="hd-tabs__tab hd-tabs__tab--active"
+                            data-view="kanban"
+                          >
+                            Канбан
+                          </button>
+                          <button type="button" class="hd-tabs__tab" data-view="table">
+                            Таблица
+                          </button>
+                          <button type="button" class="hd-tabs__tab" data-view="grid">
+                            Карточки
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="requests-workspace" id="requestsWorkspace">
+                        <div id="kanbanView" class="kanban">
+                          <div class="kanban__col" data-status="new">
+                            <div class="kanban__head" style="border-top-color: #5e84f6">
+                              <span class="kanban__head-label">Новая</span>
+                              <span class="kanban__head-count" data-count="new">0</span>
+                            </div>
+                            <div class="kanban__list" data-list="new"></div>
+                          </div>
+                          <div class="kanban__col" data-status="assigned">
+                            <div class="kanban__head" style="border-top-color: #1c41b4">
+                              <span class="kanban__head-label">Назначена</span>
+                              <span class="kanban__head-count" data-count="assigned">0</span>
+                            </div>
+                            <div class="kanban__list" data-list="assigned"></div>
+                          </div>
+                          <div class="kanban__col" data-status="in_progress">
+                            <div class="kanban__head" style="border-top-color: #e79a16">
+                              <span class="kanban__head-label">В работе</span>
+                              <span class="kanban__head-count" data-count="in_progress">0</span>
+                            </div>
+                            <div class="kanban__list" data-list="in_progress"></div>
+                          </div>
+                          <div class="kanban__col" data-status="done">
+                            <div class="kanban__head" style="border-top-color: #1f8a4c">
+                              <span class="kanban__head-label">Выполнена</span>
+                              <span class="kanban__head-count" data-count="done">0</span>
+                            </div>
+                            <div class="kanban__list" data-list="done"></div>
+                          </div>
+                        </div>
+
+                        <div class="requests-table-wrap" id="tableView" hidden>
+                          <table class="requests-table">
+                            <thead>
+                              <tr>
+                                <th>№</th>
+                                <th>Заявка</th>
+                                <th>Приоритет</th>
+                                <th>Статус</th>
+                                <th>Житель</th>
+                              </tr>
+                            </thead>
+                            <tbody id="tableBody"></tbody>
+                          </table>
+                        </div>
+
+                        <div class="ticket-grid" id="gridView" hidden></div>
+                      </div>
+                    </div>
+
+                    <div class="page is-active" data-screen-panel="dashboard">
+                      <div class="kpi-grid">
+                        <div class="kpi-card" style="background: #eef3ff; border-color: #bccdff">
+                          <div class="kpi-card__head">
+                            <span class="kpi-card__label">Открытые заявки</span>
+                            <span class="kpi-card__icon" style="background: #fff; color: #2553e0">
+                              <svg
+                                width="28"
+                                height="28"
+                                viewBox="0 0 256 256"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  d="M230.91,172A8,8,0,0,1,228,182.91l-96,56a8,8,0,0,1-8.19,0l-96-56A8,8,0,0,1,39.09,169l92,53.65,92-53.65A8,8,0,0,1,230.91,172ZM220,121.09l-92,53.65L36,121.09A8,8,0,0,0,28,134.91l96,56a8,8,0,0,0,8.19,0l96-56A8,8,0,1,0,220,121.09ZM28,86.91l96,56a8,8,0,0,0,8.19,0l96-56a8,8,0,0,0,0-13.82l-96-56a8,8,0,0,0-8.19,0l-96,56a8,8,0,0,0,0,13.82Z"
+                                />
+                              </svg>
+                            </span>
+                          </div>
+                          <div class="kpi-card__value">27</div>
+                          <div class="kpi-card__foot">
+                            <span class="kpi-card__sub">из них 8 аварийные</span>
+                          </div>
+                        </div>
+                        <div class="kpi-card" style="background: #eef3ff; border-color: #bccdff">
+                          <div class="kpi-card__head">
+                            <span class="kpi-card__label">Новые за сегодня</span>
+                            <span class="kpi-card__icon" style="background: #fff; color: #3a64ec">
+                              <svg
+                                width="28"
+                                height="28"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.75"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  d="M3.5 5.5h17A1.5 1.5 0 0 1 22 7v2.25a2.75 2.75 0 0 0 0 5.5V17a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 17v-2.25a2.75 2.75 0 0 0 0-5.5V7A1.5 1.5 0 0 1 3.5 5.5Z"
+                                />
+                                <path d="M8.5 5.5v13" />
+                              </svg>
+                            </span>
+                          </div>
+                          <div class="kpi-card__value">0</div>
+                          <div class="kpi-card__foot">
+                            <span class="kpi-card__sub">поступило сегодня</span>
+                          </div>
+                        </div>
+                        <div class="kpi-card" style="background: #fef6e9; border-color: #f8d28a">
+                          <div class="kpi-card__head">
+                            <span class="kpi-card__label">В работе</span>
+                            <span class="kpi-card__icon" style="background: #fff; color: #e79a16">
+                              <svg
+                                width="28"
+                                height="28"
+                                viewBox="0 0 256 256"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  d="M80,40V168.69L58.34,147a8,8,0,0,0-11.32,11.32l35.32,35.31a8,8,0,0,0,11.32,0L129,158.35A8,8,0,0,0,117.66,147L96,168.69V40a8,8,0,0,0-16,0Z"
+                                />
+                                <path
+                                  d="M208.66,97.66,173.34,62.35a8,8,0,0,0-11.32,0L126.7,97.66A8,8,0,0,0,138,109l21.66-21.65V216a8,8,0,0,0,16,0V87.31L197.34,109a8,8,0,0,0,11.32-11.32Z"
+                                />
+                              </svg>
+                            </span>
+                          </div>
+                          <div class="kpi-card__value">8</div>
+                          <div class="kpi-card__foot">
+                            <span class="kpi-card__sub">выполняется</span>
+                          </div>
+                        </div>
+                        <div class="kpi-card" style="background: #ecf7f0; border-color: #a8dabb">
+                          <div class="kpi-card__head">
+                            <span class="kpi-card__label">Выполнено сегодня</span>
+                            <span class="kpi-card__icon" style="background: #fff; color: #1f8a4c">
+                              <svg
+                                width="28"
+                                height="28"
+                                viewBox="0 0 256 256"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"
+                                />
+                              </svg>
+                            </span>
+                          </div>
+                          <div class="kpi-card__value">0</div>
+                          <div class="kpi-card__foot">
+                            <span class="kpi-card__sub">всего выполнено: 8</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="hd-card dynamics-chart">
+                        <div class="card-head dynamics-chart__head">
+                          <div class="dynamics-chart__titles">
+                            <h3 class="hd-h3">Динамика заявок</h3>
+                            <div class="dynamics-chart__tabs" role="tablist">
+                              <button type="button" class="dynamics-chart__tab" data-period="day">
+                                День
+                              </button>
+                              <button type="button" class="dynamics-chart__tab" data-period="week">
+                                Неделя
+                              </button>
+                              <button
+                                type="button"
+                                class="dynamics-chart__tab is-active"
+                                data-period="month"
+                              >
+                                Месяц
+                              </button>
+                              <button type="button" class="dynamics-chart__tab" data-period="year">
+                                Год
+                              </button>
+                            </div>
+                          </div>
+                          <div class="legend">
+                            <span class="legend__item"
+                              ><span class="legend__swatch" style="background: #ff7a2f"></span
+                              >Поступило</span
+                            >
+                            <span class="legend__item"
+                              ><span class="legend__swatch" style="background: #c026d3"></span
+                              >Решено</span
+                            >
+                          </div>
+                        </div>
+                        <div class="area-chart">
+                          <div class="area-chart__body">
+                            <div class="area-chart__y" aria-hidden="true">
+                              <span class="area-chart__y-tick" style="top: 0%">4</span>
+                              <span class="area-chart__y-tick" style="top: 25%">3</span>
+                              <span class="area-chart__y-tick" style="top: 50%">2</span>
+                              <span class="area-chart__y-tick" style="top: 75%">1</span>
+                              <span class="area-chart__y-tick" style="top: 100%">0</span>
+                            </div>
+                            <div class="area-chart__main">
+                              <div class="area-chart__plot">
+                                <svg
+                                  class="area-chart__svg"
+                                  viewBox="0 0 640 180"
+                                  preserveAspectRatio="none"
+                                  aria-hidden="true"
+                                >
+                                  <defs>
+                                    <linearGradient id="incFill" x1="0" y1="0" x2="0" y2="1">
+                                      <stop offset="0%" stop-color="#ff7a2f" stop-opacity="0.28" />
+                                      <stop
+                                        offset="100%"
+                                        stop-color="#ff7a2f"
+                                        stop-opacity="0.02"
+                                      />
+                                    </linearGradient>
+                                    <linearGradient id="resFill" x1="0" y1="0" x2="0" y2="1">
+                                      <stop offset="0%" stop-color="#c026d3" stop-opacity="0.22" />
+                                      <stop
+                                        offset="100%"
+                                        stop-color="#c026d3"
+                                        stop-opacity="0.02"
+                                      />
+                                    </linearGradient>
+                                  </defs>
+                                  <path
+                                    fill="url(#incFill)"
+                                    d="M0,150 C40,145 60,140 80,120 C110,80 130,70 160,90 C190,115 210,130 240,110 C280,70 300,40 340,55 C380,70 400,100 440,85 C480,65 500,30 540,45 C580,60 610,90 640,70 L640,180 L0,180 Z"
+                                  />
+                                  <path
+                                    fill="none"
+                                    stroke="#ff7a2f"
+                                    stroke-width="2.5"
+                                    d="M0,150 C40,145 60,140 80,120 C110,80 130,70 160,90 C190,115 210,130 240,110 C280,70 300,40 340,55 C380,70 400,100 440,85 C480,65 500,30 540,45 C580,60 610,90 640,70"
+                                  />
+                                  <path
+                                    fill="url(#resFill)"
+                                    d="M0,160 C50,155 70,150 100,140 C140,120 160,115 200,125 C240,135 270,145 310,130 C350,115 380,100 420,110 C460,120 490,140 530,125 C570,110 600,105 640,100 L640,180 L0,180 Z"
+                                  />
+                                  <path
+                                    fill="none"
+                                    stroke="#c026d3"
+                                    stroke-width="2.5"
+                                    d="M0,160 C50,155 70,150 100,140 C140,120 160,115 200,125 C240,135 270,145 310,130 C350,115 380,100 420,110 C460,120 490,140 530,125 C570,110 600,105 640,100"
+                                  />
+                                </svg>
+                              </div>
+                              <div class="area-chart__x" aria-hidden="true">
+                                <span>22.06</span><span>02.07</span><span>12.07</span
+                                ><span>21.07</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="dash-row dash-row--3">
+                        <div class="hd-card">
+                          <h3 class="hd-h3 card-title">Заявки по категориям</h3>
+                          <div class="cat-bars">
+                            <div class="cat-bars__row">
+                              <span class="cat-bars__label">Благоустройство</span>
+                              <div class="cat-bars__track">
+                                <div
+                                  class="cat-bars__fill"
+                                  style="width: 100%; background: #2553e0"
+                                ></div>
+                              </div>
+                              <span class="cat-bars__count">5</span>
+                            </div>
+                            <div class="cat-bars__row">
+                              <span class="cat-bars__label">Водоснабжение</span>
+                              <div class="cat-bars__track">
+                                <div
+                                  class="cat-bars__fill"
+                                  style="width: 100%; background: #e79a16"
+                                ></div>
+                              </div>
+                              <span class="cat-bars__count">5</span>
+                            </div>
+                            <div class="cat-bars__row">
+                              <span class="cat-bars__label">Домофон</span>
+                              <div class="cat-bars__track">
+                                <div
+                                  class="cat-bars__fill"
+                                  style="width: 100%; background: #2f9e5d"
+                                ></div>
+                              </div>
+                              <span class="cat-bars__count">5</span>
+                            </div>
+                            <div class="cat-bars__row">
+                              <span class="cat-bars__label">Уборка</span>
+                              <div class="cat-bars__track">
+                                <div
+                                  class="cat-bars__fill"
+                                  style="width: 100%; background: #5e84f6"
+                                ></div>
+                              </div>
+                              <span class="cat-bars__count">5</span>
+                            </div>
+                            <div class="cat-bars__row">
+                              <span class="cat-bars__label">Отопление</span>
+                              <div class="cat-bars__track">
+                                <div
+                                  class="cat-bars__fill"
+                                  style="width: 100%; background: #c026d3"
+                                ></div>
+                              </div>
+                              <span class="cat-bars__count">5</span>
+                            </div>
+                            <div class="cat-bars__row">
+                              <span class="cat-bars__label">Электрика</span>
+                              <div class="cat-bars__track">
+                                <div
+                                  class="cat-bars__fill"
+                                  style="width: 100%; background: #cc2f2d"
+                                ></div>
+                              </div>
+                              <span class="cat-bars__count">5</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="hd-card">
+                          <h3 class="hd-h3 card-title">Заявки по статусам</h3>
+                          <div class="donut">
+                            <div
+                              class="donut__ring"
+                              style="
+                                background: conic-gradient(
+                                  #5e84f6 0 113deg,
+                                  #1c41b4 113deg 195deg,
+                                  #ff7a2f 195deg 277deg,
+                                  #2f9e5d 277deg 360deg
+                                );
+                              "
+                            >
+                              <div class="donut__hole">
+                                <span class="donut__total">35</span>
+                                <span class="donut__caption">всего</span>
+                              </div>
+                            </div>
+                            <div class="donut__legend">
+                              <div class="donut__legend-row">
+                                <span class="donut__swatch" style="background: #5e84f6"></span
+                                ><span class="donut__legend-label">Новые</span
+                                ><span class="donut__legend-count">11</span>
+                              </div>
+                              <div class="donut__legend-row">
+                                <span class="donut__swatch" style="background: #1c41b4"></span
+                                ><span class="donut__legend-label">Назначенные</span
+                                ><span class="donut__legend-count">8</span>
+                              </div>
+                              <div class="donut__legend-row">
+                                <span class="donut__swatch" style="background: #ff7a2f"></span
+                                ><span class="donut__legend-label">В работе</span
+                                ><span class="donut__legend-count">8</span>
+                              </div>
+                              <div class="donut__legend-row">
+                                <span class="donut__swatch" style="background: #2f9e5d"></span
+                                ><span class="donut__legend-label">Выполнены</span
+                                ><span class="donut__legend-count">8</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="hd-card">
+                          <h3 class="hd-h3 card-title">Загрузка исполнителей</h3>
+                          <div class="emp-load">
+                            <div class="emp-load__row">
+                              <span class="hd-avatar" style="width: 24px; height: 24px"
+                                ><span
+                                  class="hd-avatar__circle"
+                                  style="font-size: 10px; background: #2553e0"
+                                  >ДД</span
+                                ></span
+                              >
+                              <div class="emp-load__main">
+                                <div class="emp-load__name">Демо Диспетчер</div>
+                                <div class="hd-meter" style="height: 8px">
+                                  <div
+                                    class="hd-meter__fill"
+                                    style="
+                                      width: 100%;
+                                      height: 100%;
+                                      background: #2553e0;
+                                      border-radius: 999px;
+                                    "
+                                  ></div>
+                                </div>
+                              </div>
+                              <span class="emp-load__pct">16</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="page page--chats" data-screen-panel="chats">
+                      <div class="chats-toolbar">
+                        <div class="hd-search hd-search--wide">
+                          <span class="hd-search__icon" aria-hidden="true">
+                            <svg
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                            >
+                              <circle cx="11" cy="11" r="7" />
+                              <path d="M20 20l-3.5-3.5" />
+                            </svg>
+                          </span>
+                          <span class="hd-search__placeholder"
+                            >Поиск по дому, чату или тексту сообщения…</span
+                          >
+                        </div>
+                        <div class="hd-select-mock">Все дома</div>
+                      </div>
+
+                      <div class="chats-layout">
+                        <div class="hd-card chats-list">
+                          <div class="chats-list__head">
+                            <h3 class="hd-h3">Дома и чаты</h3>
+                            <span class="hd-badge hd-badge--brand">1</span>
+                          </div>
+                          <button type="button" class="chats-list__item chats-list__item--active">
+                            <div class="chats-list__top">
+                              <span class="chats-list__building">ЖК «Демо-Сервис»</span>
+                              <span class="chats-list__time">19:37</span>
+                            </div>
+                            <div class="chats-list__meta">
+                              <span>Чат -78920385083435</span>
+                              <span class="hd-badge hd-badge--warning">8</span>
+                            </div>
+                            <div class="chats-list__preview">
+                              Бот: Спасибо! Ваше обращение принято… Номер заявки: #10274
+                            </div>
+                          </button>
+                          <button type="button" class="chats-list__item">
+                            <div class="chats-list__top">
+                              <span class="chats-list__building">ЖК «Алые Паруса», корп. 1</span>
+                              <span class="chats-list__time">вчера</span>
+                            </div>
+                            <div class="chats-list__meta">
+                              <span>Чат -998120334</span>
+                            </div>
+                            <div class="chats-list__preview">
+                              Бот: создана заявка HD-1038 — нет света в подъезде
+                            </div>
+                          </button>
+                        </div>
+
+                        <div class="hd-card chats-thread">
+                          <div class="chats-thread__head">
+                            <div class="chats-thread__head-body">
+                              <h3 class="chats-thread__title">ЖК «Демо-Сервис»</h3>
+                              <span class="chats-thread__sub"
+                                >Чат -78920385083435 · 8 сообщений</span
+                              >
+                            </div>
+                            <span class="chats-thread__bound">Чат привязан к MAX</span>
+                          </div>
+                          <div class="chats-thread__messages">
+                            <div class="chats-message">
+                              <span class="hd-avatar" style="width: 32px; height: 32px"
+                                ><span class="hd-avatar__circle" style="background: #2553e0"
+                                  >К</span
+                                ></span
+                              >
+                              <div class="chats-message__content">
+                                <div class="chats-message__meta">
+                                  <span class="chats-message__author">Ксения</span>
+                                </div>
+                                <div class="chats-message__bubble">
+                                  <div class="chats-message__text chats-message__text--expanded">
+                                    В подъезде 2 сломался домофон, не открывается дверь.
+                                  </div>
+                                  <div class="chats-message__actions">
+                                    <span>Ответить</span><span>Удалить</span>
+                                  </div>
+                                </div>
+                                <span class="chats-message__time">15 июля в 14:36</span>
+                              </div>
+                            </div>
+
+                            <div class="chats-message chats-message--outgoing">
+                              <span class="hd-avatar" style="width: 32px; height: 32px"
+                                ><span class="hd-avatar__circle" style="background: #7c3aed"
+                                  >БД</span
+                                ></span
+                              >
+                              <div class="chats-message__content">
+                                <div class="chats-message__meta">
+                                  <span class="chats-message__author">Бот ДомДиспетчер</span>
+                                </div>
+                                <div class="chats-message__bubble">
+                                  <div class="chats-message__text chats-message__text--expanded">
+                                    Спасибо! Ваше обращение принято и будет передано в управляющую
+                                    компанию. Номер заявки: #10271
+                                  </div>
+                                  <div class="chats-message__actions">
+                                    <span>Ответить</span><span>Удалить</span>
+                                  </div>
+                                </div>
+                                <span class="chats-message__time">15 июля в 14:36</span>
+                              </div>
+                            </div>
+
+                            <div class="chats-message">
+                              <span class="hd-avatar" style="width: 32px; height: 32px"
+                                ><span class="hd-avatar__circle" style="background: #2553e0"
+                                  >П</span
+                                ></span
+                              >
+                              <div class="chats-message__content">
+                                <div class="chats-message__meta">
+                                  <span class="chats-message__author">Павел</span>
+                                </div>
+                                <div class="chats-message__bubble">
+                                  <div class="chats-message__text chats-message__text--expanded">
+                                    В подъезде 2 не работает лифт уже час.
+                                  </div>
+                                  <div class="chats-message__actions">
+                                    <span>Ответить</span><span>Удалить</span>
+                                  </div>
+                                </div>
+                                <span class="chats-message__time">15 июля в 15:02</span>
+                              </div>
+                            </div>
+
+                            <div class="chats-message chats-message--outgoing">
+                              <span class="hd-avatar" style="width: 32px; height: 32px"
+                                ><span class="hd-avatar__circle" style="background: #7c3aed"
+                                  >БД</span
+                                ></span
+                              >
+                              <div class="chats-message__content">
+                                <div class="chats-message__meta">
+                                  <span class="chats-message__author">Бот ДомДиспетчер</span>
+                                </div>
+                                <div class="chats-message__bubble">
+                                  <div class="chats-message__text chats-message__text--expanded">
+                                    Спасибо! Ваше обращение принято и будет передано в управляющую
+                                    компанию. Номер заявки: #10272
+                                  </div>
+                                  <div class="chats-message__actions">
+                                    <span>Ответить</span><span>Удалить</span>
+                                  </div>
+                                </div>
+                                <span class="chats-message__time">15 июля в 15:02</span>
+                              </div>
+                            </div>
+
+                            <div class="chats-message">
+                              <span class="hd-avatar" style="width: 32px; height: 32px"
+                                ><span class="hd-avatar__circle" style="background: #2553e0"
+                                  >А</span
+                                ></span
+                              >
+                              <div class="chats-message__content">
+                                <div class="chats-message__meta">
+                                  <span class="chats-message__author">Анна</span>
+                                </div>
+                                <div class="chats-message__bubble">
+                                  <div class="chats-message__text chats-message__text--expanded">
+                                    Протекает батарея в кв. 18, вода на полу!
+                                  </div>
+                                  <div class="chats-message__actions">
+                                    <span>Ответить</span><span>Удалить</span>
+                                  </div>
+                                </div>
+                                <span class="chats-message__time">15 июля в 16:18</span>
+                              </div>
+                            </div>
+
+                            <div class="chats-message chats-message--outgoing">
+                              <span class="hd-avatar" style="width: 32px; height: 32px"
+                                ><span class="hd-avatar__circle" style="background: #7c3aed"
+                                  >БД</span
+                                ></span
+                              >
+                              <div class="chats-message__content">
+                                <div class="chats-message__meta">
+                                  <span class="chats-message__author">Бот ДомДиспетчер</span>
+                                </div>
+                                <div class="chats-message__bubble">
+                                  <div class="chats-message__text chats-message__text--expanded">
+                                    Спасибо! Ваше обращение принято и будет передано в управляющую
+                                    компанию. Номер заявки: #10273
+                                  </div>
+                                  <div class="chats-message__actions">
+                                    <span>Ответить</span><span>Удалить</span>
+                                  </div>
+                                </div>
+                                <span class="chats-message__time">15 июля в 16:18</span>
+                              </div>
+                            </div>
+
+                            <div class="chats-message">
+                              <span class="hd-avatar" style="width: 32px; height: 32px"
+                                ><span class="hd-avatar__circle" style="background: #2553e0"
+                                  >С</span
+                                ></span
+                              >
+                              <div class="chats-message__content">
+                                <div class="chats-message__meta">
+                                  <span class="chats-message__author">Сергей</span>
+                                </div>
+                                <div class="chats-message__bubble">
+                                  <div class="chats-message__text chats-message__text--expanded">
+                                    На 3 этаже нет света в коридоре.
+                                  </div>
+                                  <div class="chats-message__actions">
+                                    <span>Ответить</span><span>Удалить</span>
+                                  </div>
+                                </div>
+                                <span class="chats-message__time">15 июля в 18:41</span>
+                              </div>
+                            </div>
+
+                            <div class="chats-message chats-message--outgoing">
+                              <span class="hd-avatar" style="width: 32px; height: 32px"
+                                ><span class="hd-avatar__circle" style="background: #7c3aed"
+                                  >БД</span
+                                ></span
+                              >
+                              <div class="chats-message__content">
+                                <div class="chats-message__meta">
+                                  <span class="chats-message__author">Бот ДомДиспетчер</span>
+                                </div>
+                                <div class="chats-message__bubble">
+                                  <div class="chats-message__text chats-message__text--expanded">
+                                    Спасибо! Ваше обращение принято и будет передано в управляющую
+                                    компанию. Номер заявки: #10274
+                                  </div>
+                                  <div class="chats-message__actions">
+                                    <span>Ответить</span><span>Удалить</span>
+                                  </div>
+                                </div>
+                                <span class="chats-message__time">15 июля в 18:41</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <aside class="hd-card chats-actions" aria-label="Ответ и рассылка">
+                          <div class="chats-actions__block">
+                            <h3 class="hd-h3">Ответ в чат</h3>
+                            <p class="chats-actions__sub">
+                              Сначала выберите дом, затем отправьте сообщение
+                            </p>
+                            <div class="hd-select-mock hd-select-mock--block">ЖК «Демо-Сервис»</div>
+                            <div class="hd-textarea-mock">Сообщение для ЖК «Демо-Сервис»</div>
+                            <span class="hd-btn hd-btn--block">Ответить</span>
+                          </div>
+
+                          <div class="chats-actions__block">
+                            <h3 class="hd-h3">Массовая рассылка</h3>
+                            <p class="chats-actions__sub">Выберите дома для рассылки</p>
+                            <div class="chats-broadcast-picker">
+                              <div class="chats-broadcast-picker__search">
+                                <div class="hd-search">
+                                  <span class="hd-search__icon" aria-hidden="true">
+                                    <svg
+                                      width="16"
+                                      height="16"
+                                      viewBox="0 0 24 24"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      stroke-width="2"
+                                    >
+                                      <circle cx="11" cy="11" r="7" />
+                                      <path d="M20 20l-3.5-3.5" />
+                                    </svg>
+                                  </span>
+                                  <span class="hd-search__placeholder"
+                                    >Поиск по названию дома…</span
+                                  >
+                                </div>
+                              </div>
+                              <div class="chats-broadcast-picker__body">
+                                <div
+                                  class="chats-broadcast-picker__row chats-broadcast-picker__row--all"
+                                >
+                                  <span
+                                    class="chats-broadcast-picker__check"
+                                    aria-hidden="true"
+                                  ></span>
+                                  <span class="chats-broadcast-picker__label">Все дома</span>
+                                </div>
+                                <div class="chats-broadcast-picker__list">
+                                  <div class="chats-broadcast-picker__row">
+                                    <span
+                                      class="chats-broadcast-picker__check chats-broadcast-picker__check--on"
+                                      aria-hidden="true"
+                                    >
+                                      <svg
+                                        width="14"
+                                        height="14"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="#fff"
+                                        stroke-width="3"
+                                      >
+                                        <path d="M5 12l5 5L20 7" />
+                                      </svg>
+                                    </span>
+                                    <span class="chats-broadcast-picker__label"
+                                      >ЖК «Демо-Сервис»</span
+                                    >
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="hd-textarea-mock">Текст для выбранных домов</div>
+                            <span class="hd-btn hd-btn--secondary hd-btn--block"
+                              >Отправить всем</span
+                            >
+                          </div>
+                        </aside>
+                      </div>
+                    </div>
+
+                    <div class="page page--buildings" data-screen-panel="buildings">
+                      <div class="page-header">
+                        <p class="page-header__subtitle">4 в списке</p>
+                        <span class="hd-btn">+ Добавить дом</span>
+                      </div>
+                      <div class="cards-grid cards-grid--340">
+                        <article class="building-card building-card--actionable">
+                          <div class="building-card__head">
+                            <div class="building-card__icon" aria-hidden="true">
+                              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                  d="M3 21V8l7-5 4 3v-1h7v15h-7v-6H10v6H3Zm2-2h3v-4h8v4h3V9.5l-5-3.57V8h-3.5L5 10.2V19Z"
+                                />
+                              </svg>
+                            </div>
+                            <div class="building-card__content">
+                              <div class="building-card__title-row">
+                                <div class="building-card__name">ЖК «Демо-Сервис», 1</div>
+                              </div>
+                              <div class="building-card__addr">г. Москва, ул. Парусная, 12</div>
+                              <div class="building-card__status">
+                                <span class="hd-badge hd-badge--success"
+                                  ><span class="hd-badge__dot"></span>Бот подключён</span
+                                >
+                              </div>
+                            </div>
+                          </div>
+                        </article>
+                        <article class="building-card building-card--actionable">
+                          <div class="building-card__head">
+                            <div class="building-card__icon" aria-hidden="true">
+                              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                  d="M3 21V8l7-5 4 3v-1h7v15h-7v-6H10v6H3Zm2-2h3v-4h8v4h3V9.5l-5-3.57V8h-3.5L5 10.2V19Z"
+                                />
+                              </svg>
+                            </div>
+                            <div class="building-card__content">
+                              <div class="building-card__title-row">
+                                <div class="building-card__name">ЖК «Алые Паруса», корп. 1</div>
+                              </div>
+                              <div class="building-card__addr">г. Москва, ул. Парусная, 12к1</div>
+                              <div class="building-card__status">
+                                <span class="hd-badge hd-badge--success"
+                                  ><span class="hd-badge__dot"></span>Бот подключён</span
+                                >
+                              </div>
+                            </div>
+                          </div>
+                        </article>
+                        <article class="building-card building-card--actionable">
+                          <div class="building-card__head">
+                            <div class="building-card__icon" aria-hidden="true">
+                              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                  d="M3 21V8l7-5 4 3v-1h7v15h-7v-6H10v6H3Zm2-2h3v-4h8v4h3V9.5l-5-3.57V8h-3.5L5 10.2V19Z"
+                                />
+                              </svg>
+                            </div>
+                            <div class="building-card__content">
+                              <div class="building-card__title-row">
+                                <div class="building-card__name">ЖК «Северный Парк», корп. 1</div>
+                              </div>
+                              <div class="building-card__addr">г. Москва, пр. Северный, 5</div>
+                              <div class="building-card__status">
+                                <span class="hd-badge hd-badge--warning"
+                                  ><span class="hd-badge__dot"></span>Бот не подключён</span
+                                >
+                              </div>
+                            </div>
+                          </div>
+                        </article>
+                        <article class="building-card building-card--actionable">
+                          <div class="building-card__head">
+                            <div class="building-card__icon" aria-hidden="true">
+                              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                  d="M3 21V8l7-5 4 3v-1h7v15h-7v-6H10v6H3Zm2-2h3v-4h8v4h3V9.5l-5-3.57V8h-3.5L5 10.2V19Z"
+                                />
+                              </svg>
+                            </div>
+                            <div class="building-card__content">
+                              <div class="building-card__title-row">
+                                <div class="building-card__name">ул. Ленина, 12</div>
+                              </div>
+                              <div class="building-card__addr">г. Москва, ул. Ленина, 12</div>
+                              <div class="building-card__status">
+                                <span class="hd-badge hd-badge--success"
+                                  ><span class="hd-badge__dot"></span>Бот подключён</span
+                                >
+                              </div>
+                            </div>
+                          </div>
+                        </article>
+                      </div>
+                    </div>
+
+                    <div class="page page--faq" data-screen-panel="faq">
+                      <div class="page-header">
+                        <p class="page-header__subtitle">5 вопросов · только просмотр</p>
+                      </div>
+                      <div class="admin-toolbar">
+                        <div class="admin-toolbar__search">
+                          <div class="hd-search hd-search--wide">
+                            <span class="hd-search__icon" aria-hidden="true">
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                              >
+                                <circle cx="11" cy="11" r="7" />
+                                <path d="M20 20l-3.5-3.5" />
+                              </svg>
+                            </span>
+                            <span class="hd-search__placeholder">Поиск по вопросу или ответу…</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="faq-list hd-card hd-card--flush">
+                        <div class="faq-item faq-item--open">
+                          <button type="button" class="faq-item__question">
+                            <span class="faq-item__question-text"
+                              >У нас нет холодной воды! Когда появится?</span
+                            >
+                            <span class="faq-item__chevron" aria-hidden="true">
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                              >
+                                <path d="M8 9l4-4 4 4M8 15l4 4 4-4" />
+                              </svg>
+                            </span>
+                          </button>
+                          <div class="faq-item__body">
+                            <div class="faq-item__answer">
+                              Отключение холодной воды обычно связано с аварией или плановыми
+                              работами. Уточните адрес — и диспетчер сообщит ориентировочные сроки
+                              возобновления подачи.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="faq-item">
+                          <button type="button" class="faq-item__question">
+                            <span class="faq-item__question-text"
+                              >До какого числа отключат горячую воду на профилактику?</span
+                            >
+                            <span class="faq-item__chevron" aria-hidden="true">
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                              >
+                                <path d="M8 9l4-4 4 4M8 15l4 4 4-4" />
+                              </svg>
+                            </span>
+                          </button>
+                        </div>
+                        <div class="faq-item">
+                          <button type="button" class="faq-item__question">
+                            <span class="faq-item__question-text"
+                              >Почему батареи холодные? На улице мороз!</span
+                            >
+                            <span class="faq-item__chevron" aria-hidden="true">
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                              >
+                                <path d="M8 9l4-4 4 4M8 15l4 4 4-4" />
+                              </svg>
+                            </span>
+                          </button>
+                        </div>
+                        <div class="faq-item">
+                          <button type="button" class="faq-item__question">
+                            <span class="faq-item__question-text">Когда уборка подъездов?</span>
+                            <span class="faq-item__chevron" aria-hidden="true">
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                              >
+                                <path d="M8 9l4-4 4 4M8 15l4 4 4-4" />
+                              </svg>
+                            </span>
+                          </button>
+                        </div>
+                        <div class="faq-item">
+                          <button type="button" class="faq-item__question">
+                            <span class="faq-item__question-text"
+                              >Куда передать показания счётчиков?</span
+                            >
+                            <span class="faq-item__chevron" aria-hidden="true">
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                              >
+                                <path d="M8 9l4-4 4 4M8 15l4 4 4-4" />
+                              </svg>
+                            </span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="page" data-screen-panel="staff">
+                      <div class="requests-table-wrap">
+                        <table class="requests-table">
+                          <thead>
+                            <tr>
+                              <th>Сотрудник</th>
+                              <th>Роль</th>
+                              <th>Статус</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Морозова Д.А.</td>
+                              <td>Администратор</td>
+                              <td>Активен</td>
+                            </tr>
+                            <tr>
+                              <td>Кузьмин Д.В.</td>
+                              <td>Старший диспетчер</td>
+                              <td>Активен</td>
+                            </tr>
+                            <tr>
+                              <td>Зайцев О.Н.</td>
+                              <td>Исполнитель</td>
+                              <td>Активен</td>
+                            </tr>
+                            <tr>
+                              <td>Соколов И.П.</td>
+                              <td>Исполнитель</td>
+                              <td>В смене</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    <div class="page page--calendar" data-screen-panel="calendar">
+                      <div class="calendar-layout">
+                        <div class="hd-card">
+                          <div class="calendar-head">
+                            <h3 class="hd-h3 calendar-head__title">Июль 2026 г.</h3>
+                            <div class="calendar-nav">
+                              <button
+                                type="button"
+                                class="hd-icon-btn"
+                                aria-label="Предыдущий месяц"
+                              >
+                                ‹
+                              </button>
+                              <span class="hd-btn hd-btn--ghost hd-btn--sm">Сегодня</span>
+                              <button
+                                type="button"
+                                class="hd-icon-btn"
+                                aria-label="Следующий месяц"
+                              >
+                                ›
+                              </button>
+                            </div>
+                          </div>
+                          <div class="calendar-grid calendar-grid--head">
+                            <div class="calendar-grid__wd">Пн</div>
+                            <div class="calendar-grid__wd">Вт</div>
+                            <div class="calendar-grid__wd">Ср</div>
+                            <div class="calendar-grid__wd">Чт</div>
+                            <div class="calendar-grid__wd">Пт</div>
+                            <div class="calendar-grid__wd">Сб</div>
+                            <div class="calendar-grid__wd">Вс</div>
+                          </div>
+                          <div class="calendar-grid">
+                            <div></div>
+                            <div></div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">1</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">2</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">3</span>
+                              <div class="calendar-cell__event calendar-cell__event--request">
+                                <span
+                                  class="calendar-cell__event-dot"
+                                  style="background: #e79a16"
+                                ></span>
+                                <span class="calendar-cell__event-title"
+                                  >#12038 Домофон: демо…</span
+                                >
+                              </div>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">4</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">5</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">6</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">7</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">8</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">9</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">10</span>
+                              <div class="calendar-cell__event calendar-cell__event--request">
+                                <span
+                                  class="calendar-cell__event-dot"
+                                  style="background: #2f9e5d"
+                                ></span>
+                                <span class="calendar-cell__event-title"
+                                  >#12039 Водоснабжение: д…</span
+                                >
+                              </div>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">11</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">12</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">13</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">14</span>
+                            </div>
+                            <div class="calendar-cell calendar-cell--selected">
+                              <span class="calendar-cell__num">15</span>
+                              <div class="calendar-cell__event calendar-cell__event--request">
+                                <span
+                                  class="calendar-cell__event-dot"
+                                  style="background: #3a64ec"
+                                ></span>
+                                <span class="calendar-cell__event-title"
+                                  >#10285 Сообщается о пож…</span
+                                >
+                              </div>
+                              <div class="calendar-cell__event calendar-cell__event--request">
+                                <span
+                                  class="calendar-cell__event-dot"
+                                  style="background: #3a64ec"
+                                ></span>
+                                <span class="calendar-cell__event-title"
+                                  >#10271 Протечка в кварт…</span
+                                >
+                              </div>
+                              <div class="calendar-cell__event calendar-cell__event--request">
+                                <span
+                                  class="calendar-cell__event-dot"
+                                  style="background: #3a64ec"
+                                ></span>
+                                <span class="calendar-cell__event-title"
+                                  >#10001 Тестовая заявка из…</span
+                                >
+                              </div>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">16</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">17</span>
+                              <div class="calendar-cell__event calendar-cell__event--request">
+                                <span
+                                  class="calendar-cell__event-dot"
+                                  style="background: #5e84f6"
+                                ></span>
+                                <span class="calendar-cell__event-title"
+                                  >#12040 Благоустройство: д…</span
+                                >
+                              </div>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">18</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">19</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">20</span>
+                            </div>
+                            <div class="calendar-cell calendar-cell--today">
+                              <span class="calendar-cell__num">21</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">22</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">23</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">24</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">25</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">26</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">27</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">28</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">29</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">30</span>
+                            </div>
+                            <div class="calendar-cell">
+                              <span class="calendar-cell__num">31</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="hd-card">
+                          <h3 class="hd-h3 card-title">15 июля</h3>
+                          <div class="calendar-section">
+                            <div class="calendar-section__head">
+                              <h4 class="calendar-section__title">Заявки</h4>
+                              <span class="hd-badge hd-badge--brand">3</span>
+                            </div>
+                            <div class="calendar-tasks">
+                              <div class="calendar-task calendar-task--request">
+                                <span class="calendar-task__dot" style="background: #3a64ec"></span>
+                                <span class="calendar-task__body">
+                                  <span class="calendar-task__num">#10285</span>
+                                  <span class="calendar-task__title">Сообщается о пожаре</span>
+                                </span>
+                                <span class="hd-badge hd-badge--brand">Новая</span>
+                              </div>
+                              <div class="calendar-task calendar-task--request">
+                                <span class="calendar-task__dot" style="background: #3a64ec"></span>
+                                <span class="calendar-task__body">
+                                  <span class="calendar-task__num">#10271</span>
+                                  <span class="calendar-task__title">Протечка в квартире</span>
+                                </span>
+                                <span class="hd-badge hd-badge--brand">Новая</span>
+                              </div>
+                              <div class="calendar-task calendar-task--request">
+                                <span class="calendar-task__dot" style="background: #3a64ec"></span>
+                                <span class="calendar-task__body">
+                                  <span class="calendar-task__num">#10001</span>
+                                  <span class="calendar-task__title">Тестовая заявка из MAX</span>
+                                </span>
+                                <span class="hd-badge hd-badge--brand">Новая</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="calendar-section">
+                            <div class="calendar-section__head">
+                              <h4 class="calendar-section__title">Задачи</h4>
+                              <span class="hd-badge hd-badge--neutral">0</span>
+                            </div>
+                            <div class="calendar-add">
+                              <div class="hd-input-mock">Задача на этот день…</div>
+                              <span class="hd-btn hd-btn--sm hd-btn--icon">+</span>
+                            </div>
+                            <div class="empty-hint">На этот день задач нет</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="page page--tasks" data-screen-panel="tasks">
+                      <div class="hd-card task-add">
+                        <div class="hd-input-mock task-add__title">Новая задача…</div>
+                        <div class="hd-input-mock task-add__assignee">Исполнитель</div>
+                        <div class="hd-input-mock task-add__due">
+                          <span>Срок</span>
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            aria-hidden="true"
+                          >
+                            <rect x="3" y="5" width="18" height="16" rx="2" />
+                            <path d="M3 10h18M8 3v4M16 3v4" />
+                          </svg>
+                        </div>
+                        <div class="hd-select-mock task-add__prio">Средний</div>
+                        <span class="hd-btn">Добавить</span>
+                      </div>
+
+                      <div class="tasks-list hd-card hd-card--flush">
+                        <div class="tasks-list__row">
+                          <span
+                            class="tasks-list__check"
+                            role="checkbox"
+                            aria-checked="false"
+                          ></span>
+                          <div class="tasks-list__main">
+                            <div class="tasks-list__title">
+                              Проверить подключение MAX на Ленина 12
+                            </div>
+                            <div class="tasks-list__meta">срок: без срока</div>
+                          </div>
+                          <span class="hd-badge hd-badge--brand">Средний</span>
+                          <button type="button" class="hd-icon-btn" aria-label="Редактировать">
+                            <svg
+                              width="18"
+                              height="18"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                            >
+                              <path d="M12 20h9" />
+                              <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" />
+                            </svg>
+                          </button>
+                          <button type="button" class="hd-icon-btn" aria-label="Удалить">
+                            <svg
+                              width="18"
+                              height="18"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                            >
+                              <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6" />
+                            </svg>
+                          </button>
+                        </div>
+                        <div class="tasks-list__row">
+                          <span
+                            class="tasks-list__check tasks-list__check--done"
+                            role="checkbox"
+                            aria-checked="true"
+                          >
+                            <svg
+                              width="14"
+                              height="14"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="#fff"
+                              stroke-width="3"
+                            >
+                              <path d="M5 12l5 5L20 7" />
+                            </svg>
+                          </span>
+                          <div class="tasks-list__main">
+                            <div class="tasks-list__title tasks-list__title--done">
+                              Купить запчасти для лифта
+                            </div>
+                            <div class="tasks-list__meta">
+                              Исполнитель: Иван Иванович · срок: 24 июля
+                            </div>
+                          </div>
+                          <span class="hd-badge hd-badge--warning">Высокий</span>
+                          <button type="button" class="hd-icon-btn" aria-label="Редактировать">
+                            <svg
+                              width="18"
+                              height="18"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                            >
+                              <path d="M12 20h9" />
+                              <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" />
+                            </svg>
+                          </button>
+                          <button type="button" class="hd-icon-btn" aria-label="Удалить">
+                            <svg
+                              width="18"
+                              height="18"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                            >
+                              <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="page page--analytics" data-screen-panel="analytics">
+                      <div class="kpi-grid">
+                        <div class="kpi-card" style="background: #eef3ff; border-color: #bccdff">
+                          <div class="kpi-card__head">
+                            <span class="kpi-card__label">Открытые заявки</span>
+                            <span class="kpi-card__icon" style="background: #fff; color: #2553e0">
+                              <svg
+                                width="28"
+                                height="28"
+                                viewBox="0 0 256 256"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  d="M230.91,172A8,8,0,0,1,228,182.91l-96,56a8,8,0,0,1-8.19,0l-96-56A8,8,0,0,1,39.09,169l92,53.65,92-53.65A8,8,0,0,1,230.91,172ZM220,121.09l-92,53.65L36,121.09A8,8,0,0,0,28,134.91l96,56a8,8,0,0,0,8.19,0l96-56A8,8,0,1,0,220,121.09ZM28,86.91l96,56a8,8,0,0,0,8.19,0l96-56a8,8,0,0,0,0-13.82l-96-56a8,8,0,0,0-8.19,0l-96,56a8,8,0,0,0,0,13.82Z"
+                                />
+                              </svg>
+                            </span>
+                          </div>
+                          <div class="kpi-card__value">27</div>
+                          <div class="kpi-card__foot">
+                            <span class="kpi-card__sub">из них 8 аварийные</span>
+                          </div>
+                        </div>
+                        <div class="kpi-card" style="background: #eef3ff; border-color: #bccdff">
+                          <div class="kpi-card__head">
+                            <span class="kpi-card__label">Новые за сегодня</span>
+                            <span class="kpi-card__icon" style="background: #fff; color: #3a64ec">
+                              <svg
+                                width="28"
+                                height="28"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.75"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  d="M3.5 5.5h17A1.5 1.5 0 0 1 22 7v2.25a2.75 2.75 0 0 0 0 5.5V17a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 17v-2.25a2.75 2.75 0 0 0 0-5.5V7A1.5 1.5 0 0 1 3.5 5.5Z"
+                                />
+                                <path d="M8.5 5.5v13" />
+                              </svg>
+                            </span>
+                          </div>
+                          <div class="kpi-card__value">0</div>
+                          <div class="kpi-card__foot">
+                            <span class="kpi-card__sub">поступило сегодня</span>
+                          </div>
+                        </div>
+                        <div class="kpi-card" style="background: #fef6e9; border-color: #f8d28a">
+                          <div class="kpi-card__head">
+                            <span class="kpi-card__label">В работе</span>
+                            <span class="kpi-card__icon" style="background: #fff; color: #e79a16">
+                              <svg
+                                width="28"
+                                height="28"
+                                viewBox="0 0 256 256"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  d="M80,40V168.69L58.34,147a8,8,0,0,0-11.32,11.32l35.32,35.31a8,8,0,0,0,11.32,0L129,158.35A8,8,0,0,0,117.66,147L96,168.69V40a8,8,0,0,0-16,0Z"
+                                />
+                                <path
+                                  d="M208.66,97.66,173.34,62.35a8,8,0,0,0-11.32,0L126.7,97.66A8,8,0,0,0,138,109l21.66-21.65V216a8,8,0,0,0,16,0V87.31L197.34,109a8,8,0,0,0,11.32-11.32Z"
+                                />
+                              </svg>
+                            </span>
+                          </div>
+                          <div class="kpi-card__value">8</div>
+                          <div class="kpi-card__foot">
+                            <span class="kpi-card__sub">выполняется</span>
+                          </div>
+                        </div>
+                        <div class="kpi-card" style="background: #ecf7f0; border-color: #a8dabb">
+                          <div class="kpi-card__head">
+                            <span class="kpi-card__label">Выполнено сегодня</span>
+                            <span class="kpi-card__icon" style="background: #fff; color: #1f8a4c">
+                              <svg
+                                width="28"
+                                height="28"
+                                viewBox="0 0 256 256"
+                                fill="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"
+                                />
+                              </svg>
+                            </span>
+                          </div>
+                          <div class="kpi-card__value">0</div>
+                          <div class="kpi-card__foot">
+                            <span class="kpi-card__sub">всего выполнено: 8</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="hd-card dynamics-chart">
+                        <div class="card-head dynamics-chart__head">
+                          <div class="dynamics-chart__titles">
+                            <h3 class="hd-h3">Динамика заявок</h3>
+                            <div class="dynamics-chart__tabs" role="tablist">
+                              <button type="button" class="dynamics-chart__tab" data-period="day">
+                                День
+                              </button>
+                              <button type="button" class="dynamics-chart__tab" data-period="week">
+                                Неделя
+                              </button>
+                              <button
+                                type="button"
+                                class="dynamics-chart__tab is-active"
+                                data-period="month"
+                              >
+                                Месяц
+                              </button>
+                              <button type="button" class="dynamics-chart__tab" data-period="year">
+                                Год
+                              </button>
+                            </div>
+                          </div>
+                          <div class="legend">
+                            <span class="legend__item"
+                              ><span class="legend__swatch" style="background: #ff7a2f"></span
+                              >Поступило</span
+                            >
+                            <span class="legend__item"
+                              ><span class="legend__swatch" style="background: #c026d3"></span
+                              >Решено</span
+                            >
+                          </div>
+                        </div>
+                        <div class="area-chart">
+                          <div class="area-chart__body">
+                            <div class="area-chart__y" aria-hidden="true">
+                              <span class="area-chart__y-tick" style="top: 0%">4</span>
+                              <span class="area-chart__y-tick" style="top: 25%">3</span>
+                              <span class="area-chart__y-tick" style="top: 50%">2</span>
+                              <span class="area-chart__y-tick" style="top: 75%">1</span>
+                              <span class="area-chart__y-tick" style="top: 100%">0</span>
+                            </div>
+                            <div class="area-chart__main">
+                              <div class="area-chart__plot">
+                                <svg
+                                  class="area-chart__svg"
+                                  viewBox="0 0 640 180"
+                                  preserveAspectRatio="none"
+                                  aria-hidden="true"
+                                >
+                                  <defs>
+                                    <linearGradient
+                                      id="analyticsIncFill"
+                                      x1="0"
+                                      y1="0"
+                                      x2="0"
+                                      y2="1"
+                                    >
+                                      <stop offset="0%" stop-color="#ff7a2f" stop-opacity="0.28" />
+                                      <stop
+                                        offset="100%"
+                                        stop-color="#ff7a2f"
+                                        stop-opacity="0.02"
+                                      />
+                                    </linearGradient>
+                                    <linearGradient
+                                      id="analyticsResFill"
+                                      x1="0"
+                                      y1="0"
+                                      x2="0"
+                                      y2="1"
+                                    >
+                                      <stop offset="0%" stop-color="#c026d3" stop-opacity="0.22" />
+                                      <stop
+                                        offset="100%"
+                                        stop-color="#c026d3"
+                                        stop-opacity="0.02"
+                                      />
+                                    </linearGradient>
+                                  </defs>
+                                  <path
+                                    fill="url(#analyticsIncFill)"
+                                    d="M0,150 C40,145 60,140 80,120 C110,80 130,70 160,90 C190,115 210,130 240,110 C280,70 300,40 340,55 C380,70 400,100 440,85 C480,65 500,30 540,45 C580,60 610,90 640,70 L640,180 L0,180 Z"
+                                  />
+                                  <path
+                                    fill="none"
+                                    stroke="#ff7a2f"
+                                    stroke-width="2.5"
+                                    d="M0,150 C40,145 60,140 80,120 C110,80 130,70 160,90 C190,115 210,130 240,110 C280,70 300,40 340,55 C380,70 400,100 440,85 C480,65 500,30 540,45 C580,60 610,90 640,70"
+                                  />
+                                  <path
+                                    fill="url(#analyticsResFill)"
+                                    d="M0,160 C50,155 70,150 100,140 C140,120 160,115 200,125 C240,135 270,145 310,130 C350,115 380,100 420,110 C460,120 490,140 530,125 C570,110 600,105 640,100 L640,180 L0,180 Z"
+                                  />
+                                  <path
+                                    fill="none"
+                                    stroke="#c026d3"
+                                    stroke-width="2.5"
+                                    d="M0,160 C50,155 70,150 100,140 C140,120 160,115 200,125 C240,135 270,145 310,130 C350,115 380,100 420,110 C460,120 490,140 530,125 C570,110 600,105 640,100"
+                                  />
+                                </svg>
+                              </div>
+                              <div class="area-chart__x" aria-hidden="true">
+                                <span>22.06</span><span>02.07</span><span>12.07</span
+                                ><span>21.07</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="dash-row dash-row--3">
+                        <div class="hd-card">
+                          <h3 class="hd-h3 card-title">Заявки по категориям</h3>
+                          <div class="cat-bars">
+                            <div class="cat-bars__row">
+                              <span class="cat-bars__label">Благоустройство</span>
+                              <div class="cat-bars__track">
+                                <div
+                                  class="cat-bars__fill"
+                                  style="width: 100%; background: #2553e0"
+                                ></div>
+                              </div>
+                              <span class="cat-bars__count">5</span>
+                            </div>
+                            <div class="cat-bars__row">
+                              <span class="cat-bars__label">Водоснабжение</span>
+                              <div class="cat-bars__track">
+                                <div
+                                  class="cat-bars__fill"
+                                  style="width: 100%; background: #e79a16"
+                                ></div>
+                              </div>
+                              <span class="cat-bars__count">5</span>
+                            </div>
+                            <div class="cat-bars__row">
+                              <span class="cat-bars__label">Домофон</span>
+                              <div class="cat-bars__track">
+                                <div
+                                  class="cat-bars__fill"
+                                  style="width: 100%; background: #2f9e5d"
+                                ></div>
+                              </div>
+                              <span class="cat-bars__count">5</span>
+                            </div>
+                            <div class="cat-bars__row">
+                              <span class="cat-bars__label">Уборка</span>
+                              <div class="cat-bars__track">
+                                <div
+                                  class="cat-bars__fill"
+                                  style="width: 100%; background: #5e84f6"
+                                ></div>
+                              </div>
+                              <span class="cat-bars__count">5</span>
+                            </div>
+                            <div class="cat-bars__row">
+                              <span class="cat-bars__label">Отопление</span>
+                              <div class="cat-bars__track">
+                                <div
+                                  class="cat-bars__fill"
+                                  style="width: 100%; background: #c026d3"
+                                ></div>
+                              </div>
+                              <span class="cat-bars__count">5</span>
+                            </div>
+                            <div class="cat-bars__row">
+                              <span class="cat-bars__label">Электрика</span>
+                              <div class="cat-bars__track">
+                                <div
+                                  class="cat-bars__fill"
+                                  style="width: 100%; background: #cc2f2d"
+                                ></div>
+                              </div>
+                              <span class="cat-bars__count">5</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="hd-card">
+                          <h3 class="hd-h3 card-title">Заявки по статусам</h3>
+                          <div class="donut">
+                            <div
+                              class="donut__ring"
+                              style="
+                                background: conic-gradient(
+                                  #5e84f6 0 113deg,
+                                  #1c41b4 113deg 195deg,
+                                  #ff7a2f 195deg 277deg,
+                                  #2f9e5d 277deg 360deg
+                                );
+                              "
+                            >
+                              <div class="donut__hole">
+                                <span class="donut__total">35</span>
+                                <span class="donut__caption">всего</span>
+                              </div>
+                            </div>
+                            <div class="donut__legend">
+                              <div class="donut__legend-row">
+                                <span class="donut__swatch" style="background: #5e84f6"></span
+                                ><span class="donut__legend-label">Новые</span
+                                ><span class="donut__legend-count">11</span>
+                              </div>
+                              <div class="donut__legend-row">
+                                <span class="donut__swatch" style="background: #1c41b4"></span
+                                ><span class="donut__legend-label">Назначенные</span
+                                ><span class="donut__legend-count">8</span>
+                              </div>
+                              <div class="donut__legend-row">
+                                <span class="donut__swatch" style="background: #ff7a2f"></span
+                                ><span class="donut__legend-label">В работе</span
+                                ><span class="donut__legend-count">8</span>
+                              </div>
+                              <div class="donut__legend-row">
+                                <span class="donut__swatch" style="background: #2f9e5d"></span
+                                ><span class="donut__legend-label">Выполнены</span
+                                ><span class="donut__legend-count">8</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="hd-card">
+                          <h3 class="hd-h3 card-title">Загрузка исполнителей</h3>
+                          <div class="emp-load">
+                            <div class="emp-load__row">
+                              <span class="hd-avatar" style="width: 24px; height: 24px"
+                                ><span
+                                  class="hd-avatar__circle"
+                                  style="font-size: 10px; background: #2553e0"
+                                  >ДД</span
+                                ></span
+                              >
+                              <div class="emp-load__main">
+                                <div class="emp-load__name">Демо Диспетчер</div>
+                                <div class="hd-meter" style="height: 8px">
+                                  <div
+                                    class="hd-meter__fill"
+                                    style="
+                                      width: 100%;
+                                      height: 100%;
+                                      background: #2553e0;
+                                      border-radius: 999px;
+                                    "
+                                  ></div>
+                                </div>
+                              </div>
+                              <span class="emp-load__pct">16</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="page" data-screen-panel="documents">
+                      <div class="stack">
+                        <div class="doc-row">
+                          <strong>Договор_УК_2026.pdf</strong><span>12 янв</span>
+                        </div>
+                        <div class="doc-row">
+                          <strong>Регламент_аварий.xlsx</strong><span>3 мар</span>
+                        </div>
+                        <div class="doc-row">
+                          <strong>Инструкция_MAX_бот.pdf</strong><span>18 апр</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="page page--tariffs tariffs-page" data-screen-panel="tariffs">
+                      <div class="page-header page-header--center">
+                        <p class="page-header__subtitle">Сейчас у вас: Демо доступ</p>
+                      </div>
+                      <div class="tariffs-grid" style="--tariffs-cols: 3">
+                        <article class="tariff-card hd-card tariff-card--current">
+                          <div class="tariff-card__head">
+                            <div class="tariff-card__title-row">
+                              <h3 class="tariff-card__name">Демо доступ</h3>
+                              <span class="hd-badge hd-badge--success">Текущий</span>
+                            </div>
+                            <p class="tariff-card__desc">
+                              Песочница для внутренних тестов и демонстраций.
+                            </p>
+                          </div>
+                          <div class="tariff-card__price">
+                            <span class="tariff-card__amount">в месяц</span>
+                            <span class="tariff-card__period">Осталось 25 дн.</span>
+                          </div>
+                          <ul class="tariff-card__features">
+                            <li>
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="var(--hd-green-600)"
+                                stroke-width="2.5"
+                                aria-hidden="true"
+                              >
+                                <path d="M5 12l5 5L20 7" />
+                              </svg>
+                              <span>Ограниченный функционал</span>
+                            </li>
+                            <li>
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="var(--hd-green-600)"
+                                stroke-width="2.5"
+                                aria-hidden="true"
+                              >
+                                <path d="M5 12l5 5L20 7" />
+                              </svg>
+                              <span>Тестовые обращения</span>
+                            </li>
+                            <li>
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="var(--hd-green-600)"
+                                stroke-width="2.5"
+                                aria-hidden="true"
+                              >
+                                <path d="M5 12l5 5L20 7" />
+                              </svg>
+                              <span>Техническая поддержка</span>
+                            </li>
+                          </ul>
+                          <span class="hd-btn tariff-card__cta tariff-card__cta--current"
+                            >Текущий план</span
+                          >
+                        </article>
+
+                        <article class="tariff-card hd-card">
+                          <div class="tariff-card__head">
+                            <div class="tariff-card__title-row">
+                              <h3 class="tariff-card__name">Стандартный</h3>
+                            </div>
+                            <p class="tariff-card__desc">
+                              Базовый тариф после пробного периода с лимитами.
+                            </p>
+                          </div>
+                          <div class="tariff-card__price">
+                            <span class="tariff-card__amount">бессрочно</span>
+                          </div>
+                          <ul class="tariff-card__features">
+                            <li>
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="var(--hd-green-600)"
+                                stroke-width="2.5"
+                                aria-hidden="true"
+                              >
+                                <path d="M5 12l5 5L20 7" />
+                              </svg>
+                              <span>До 5 домов и 5 чатов</span>
+                            </li>
+                            <li>
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="var(--hd-green-600)"
+                                stroke-width="2.5"
+                                aria-hidden="true"
+                              >
+                                <path d="M5 12l5 5L20 7" />
+                              </svg>
+                              <span>До 3 сотрудников</span>
+                            </li>
+                            <li>
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="var(--hd-green-600)"
+                                stroke-width="2.5"
+                                aria-hidden="true"
+                              >
+                                <path d="M5 12l5 5L20 7" />
+                              </svg>
+                              <span>Заявки из чатов</span>
+                            </li>
+                            <li>
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="var(--hd-green-600)"
+                                stroke-width="2.5"
+                                aria-hidden="true"
+                              >
+                                <path d="M5 12l5 5L20 7" />
+                              </svg>
+                              <span>Без AI-спама и FAQ</span>
+                            </li>
+                          </ul>
+                          <span class="hd-btn hd-btn--secondary tariff-card__cta">Подключить</span>
+                        </article>
+
+                        <article class="tariff-card hd-card tariff-card--highlighted">
+                          <div class="tariff-card__head">
+                            <div class="tariff-card__title-row">
+                              <h3 class="tariff-card__name">Полный доступ</h3>
+                              <span class="hd-badge hd-badge--brand">Рекомендуем</span>
+                            </div>
+                            <p class="tariff-card__desc">
+                              Весь функционал кабинета администратора УК без ограничений.
+                            </p>
+                          </div>
+                          <div class="tariff-card__price">
+                            <span class="tariff-card__amount">в месяц</span>
+                          </div>
+                          <ul class="tariff-card__features">
+                            <li>
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="var(--hd-green-600)"
+                                stroke-width="2.5"
+                                aria-hidden="true"
+                              >
+                                <path d="M5 12l5 5L20 7" /></svg
+                              ><span>Дашборд по объектам</span>
+                            </li>
+                            <li>
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="var(--hd-green-600)"
+                                stroke-width="2.5"
+                                aria-hidden="true"
+                              >
+                                <path d="M5 12l5 5L20 7" /></svg
+                              ><span>Заявки и обращения жителей</span>
+                            </li>
+                            <li>
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="var(--hd-green-600)"
+                                stroke-width="2.5"
+                                aria-hidden="true"
+                              >
+                                <path d="M5 12l5 5L20 7" /></svg
+                              ><span>Чаты по домам</span>
+                            </li>
+                            <li>
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="var(--hd-green-600)"
+                                stroke-width="2.5"
+                                aria-hidden="true"
+                              >
+                                <path d="M5 12l5 5L20 7" /></svg
+                              ><span>Управление домами</span>
+                            </li>
+                            <li>
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="var(--hd-green-600)"
+                                stroke-width="2.5"
+                                aria-hidden="true"
+                              >
+                                <path d="M5 12l5 5L20 7" /></svg
+                              ><span>FAQ для бота Макс</span>
+                            </li>
+                            <li>
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="var(--hd-green-600)"
+                                stroke-width="2.5"
+                                aria-hidden="true"
+                              >
+                                <path d="M5 12l5 5L20 7" /></svg
+                              ><span>Сотрудники и исполнители</span>
+                            </li>
+                            <li>
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="var(--hd-green-600)"
+                                stroke-width="2.5"
+                                aria-hidden="true"
+                              >
+                                <path d="M5 12l5 5L20 7" /></svg
+                              ><span>Календарь заявок и задач</span>
+                            </li>
+                            <li>
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="var(--hd-green-600)"
+                                stroke-width="2.5"
+                                aria-hidden="true"
+                              >
+                                <path d="M5 12l5 5L20 7" /></svg
+                              ><span>Внутренние задачи команды</span>
+                            </li>
+                            <li>
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="var(--hd-green-600)"
+                                stroke-width="2.5"
+                                aria-hidden="true"
+                              >
+                                <path d="M5 12l5 5L20 7" /></svg
+                              ><span>Аналитика по заявкам</span>
+                            </li>
+                            <li>
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="var(--hd-green-600)"
+                                stroke-width="2.5"
+                                aria-hidden="true"
+                              >
+                                <path d="M5 12l5 5L20 7" /></svg
+                              ><span>Архив документов</span>
+                            </li>
+                            <li>
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="var(--hd-green-600)"
+                                stroke-width="2.5"
+                                aria-hidden="true"
+                              >
+                                <path d="M5 12l5 5L20 7" /></svg
+                              ><span>Техническая поддержка</span>
+                            </li>
+                          </ul>
+                          <span class="hd-btn tariff-card__cta">Подключить</span>
+                        </article>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hd-drawer__backdrop" id="ticketDrawer" hidden>
+                <aside
+                  class="hd-drawer"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="drawerTitle"
+                  style="width: min(480px, 92vw)"
+                >
+                  <div class="hd-drawer__header">
+                    <div class="ticket-drawer__head-left">
+                      <span class="ticket-drawer__num" id="drawerNum"></span>
+                      <span class="hd-badge" id="drawerStatusBadge"></span>
+                      <span class="hd-badge" id="drawerPrioBadge"></span>
+                    </div>
+                    <button type="button" class="hd-icon-btn" id="drawerClose" aria-label="Закрыть">
+                      ×
+                    </button>
+                  </div>
+                  <div class="hd-drawer__body">
+                    <h2 class="ticket-drawer__title" id="drawerTitle"></h2>
+                    <p class="ticket-drawer__desc" id="drawerDesc"></p>
+                    <div class="fact-grid" id="drawerFacts"></div>
+                    <section class="ticket-drawer__section">
+                      <div class="hd-section-label">Хронология</div>
+                      <div class="timeline" id="drawerTimeline"></div>
+                    </section>
+                  </div>
+                  <div class="hd-drawer__footer">
+                    <div class="ticket-actions">
+                      <div
+                        class="ticket-stages"
+                        id="drawerStages"
+                        role="group"
+                        aria-label="Этап заявки"
+                      >
+                        <button type="button" class="ticket-stages__btn" data-status="new">
+                          Новая
+                        </button>
+                        <button type="button" class="ticket-stages__btn" data-status="assigned">
+                          Назначена
+                        </button>
+                        <button type="button" class="ticket-stages__btn" data-status="in_progress">
+                          В работе
+                        </button>
+                        <button type="button" class="ticket-stages__btn" data-status="done">
+                          Выполнена
+                        </button>
+                      </div>
+                      <span class="hd-btn hd-btn--secondary hd-btn--block" id="drawerAssign"
+                        >Назначить исполнителя</span
+                      >
+                    </div>
+                  </div>
+                </aside>
+              </div>
+            </div>
+            <div class="demo-frame__overlay">
+              <button
+                type="button"
+                class="demo-frame__expand btn btn--primary btn--lg"
+                id="demoExpand"
+              >
+                Открыть на весь экран
+              </button>
+            </div>
+            <button
+              type="button"
+              class="demo-frame__close"
+              id="demoClose"
+              aria-label="Закрыть полноэкранное демо"
+            >
+              ×
+            </button>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="how">
+        <div class="container how">
+          <div class="how__visual" aria-hidden="true">
+            <div class="how-panel">
+              <div class="how-panel__mesh"></div>
+              <div class="how-panel__glow"></div>
+
+              <div class="how-panel__stage">
+                <div class="how-chat">
+                  <div class="how-chat__head">
+                    <span class="how-chat__dots"><i></i><i></i><i></i></span>
+                    <span>Чат · ул. Ленина, 12</span>
+                  </div>
+                  <div class="how-chat__bubble how-chat__bubble--in">Протекает стояк, кв. 47</div>
+                  <div class="how-chat__bubble how-chat__bubble--bot">
+                    <span class="how-chat__label">Бот ДомДиспетчер</span>
+                    Заявка <strong>#10271</strong> создана
+                  </div>
+                </div>
+
+                <div class="how-ticket">
+                  <div class="how-ticket__top">
+                    <span class="how-ticket__id">#10271</span>
+                    <span class="how-ticket__badge">Новая</span>
+                  </div>
+                  <p class="how-ticket__title">Протечка стояка, кв. 47</p>
+                  <div class="how-ticket__meta">
+                    <span>MAX</span>
+                    <span>Критический</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="how-float">
+                <div class="how-float__text">
+                  <span>Закрыто сегодня</span>
+                  <strong>47</strong>
+                </div>
+                <div class="how-float__ring" style="--p: 76">
+                  <svg viewBox="0 0 36 36" aria-hidden="true">
+                    <circle class="how-float__track" cx="18" cy="18" r="15.5" />
+                    <circle class="how-float__progress" cx="18" cy="18" r="15.5" />
+                  </svg>
+                  <span>76%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="how__content">
+            <header class="section-head section-head--left">
+              <h2>Три шага от чата до закрытой заявки</h2>
+            </header>
+
+            <ol class="steps">
+              <li class="steps__item">
+                <span class="steps__icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M4 20V9.5L12 4l8 5.5V20h-5v-5H9v5H4Z" fill="currentColor" />
+                  </svg>
+                </span>
+                <div class="steps__body">
+                  <h3>Подключите чат дома</h3>
+                  <p>Добавьте бота в групповой чат MAX и привяжите его к адресу в кабинете.</p>
+                </div>
+              </li>
+              <li class="steps__item">
+                <span class="steps__icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M7.5 3.5 9 8l4.5 1.5L9 11 7.5 15.5 6 11 1.5 9.5 6 8l1.5-4.5Zm9 5L18 12l3.5 1.5L18 15l-1.5 4.5L15 15l-3.5-1.5L15 12l1.5-3.5ZM6 17.5 7 20l2.5.8L7 21.5 6 24l-1-.8L2.5 24 3.5 21.5 1 20l2.5-.8L5 17.5Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </span>
+                <div class="steps__body">
+                  <h3>AI создаёт заявку</h3>
+                  <p>Бот отличает проблему от вопроса, заводит обращение и пишет номер в чат.</p>
+                </div>
+              </li>
+              <li class="steps__item">
+                <span class="steps__icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M4 6h16v12H4V6Zm2 2v2h3V8H6Zm5 0v2h7V8h-7Zm-5 4v2h5v-2H6Zm7 0v2h5v-2h-5Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </span>
+                <div class="steps__body">
+                  <h3>Диспетчер ведёт доску</h3>
+                  <p>
+                    Назначает исполнителя, меняет статус и закрывает заявку без потери контекста.
+                  </p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRICING -->
+      <section class="section section--muted" id="pricing">
+        <div class="container">
+          <header class="section-head">
+            <!-- <p class="eyebrow">Тарифы</p> -->
+            <h2>Выберите план для вашей УК</h2>
+            <p class="section-lead">
+              От базовой работы с заявками до полного кабинета с AI, FAQ и аналитикой.
+            </p>
+          </header>
+
+          <div class="pricing-grid">
+            <article class="price-card price-card--soft">
+              <div class="price-card__badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm1 4v5.2l3.5 2.1-.8 1.3L11 13V7h2Z"
+                    fill="currentColor"
+                  />
+                </svg>
+                Пробный период
+              </div>
+              <p class="price-card__desc">Две недели полного доступа для знакомства с продуктом.</p>
+              <div class="price-card__price">
+                <strong>14 дней</strong>
+                <span>/ бесплатно</span>
+              </div>
+              <ul class="price-card__features">
+                <li>Все модули кабинета</li>
+                <li>Полный функционал на 14 дней</li>
+                <li>Переход на стандарт после окончания</li>
+                <li>Техническая поддержка</li>
+              </ul>
+              <button
+                type="button"
+                class="btn btn--outline price-card__cta"
+                data-lead-open
+                data-tariff="trial"
+              >
+                Попробовать
+              </button>
+            </article>
+
+            <article class="price-card">
+              <div class="price-card__badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm0 2.2a6.8 6.8 0 1 1 0 13.6 6.8 6.8 0 0 1 0-13.6Zm-.9 2.3h1.8v4.1l2.7 1.6-.9 1.5-3.6-2.1V7.5Z"
+                    fill="currentColor"
+                  />
+                </svg>
+                Стандартный
+              </div>
+              <p class="price-card__desc">
+                Базовый тариф после демо: заявки из чатов с лимитами по домам и сотрудникам.
+              </p>
+              <div class="price-card__price">
+                <strong>Бессрочно</strong>
+                <span>/ с лимитами</span>
+              </div>
+              <ul class="price-card__features">
+                <li>До 5 домов и 5 чатов</li>
+                <li>До 3 сотрудников</li>
+                <li>Заявки из чатов MAX</li>
+                <li>Без AI-спама и FAQ</li>
+                <li>Техническая поддержка</li>
+              </ul>
+              <button
+                type="button"
+                class="btn btn--outline price-card__cta"
+                data-lead-open
+                data-tariff="standard"
+              >
+                Подключить
+              </button>
+            </article>
+
+            <article class="price-card price-card--featured">
+              <div class="price-card__badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M12 2.5 13.8 8H20l-5 3.6 1.9 5.9L12 14.8 7.1 17.5 9 11.6 4 8h6.2L12 2.5Z"
+                    fill="currentColor"
+                  />
+                </svg>
+                Полный доступ
+              </div>
+              <p class="price-card__desc">
+                Весь функционал кабинета УК без ограничений — AI, FAQ, аналитика и команда.
+              </p>
+              <div class="price-card__price">
+                <strong>По запросу</strong>
+                <span>/ месяц</span>
+              </div>
+              <ul class="price-card__features">
+                <li>Неограниченно домов и чатов</li>
+                <li>AI-бот и FAQ для MAX</li>
+                <li>Сотрудники и исполнители</li>
+                <li>Календарь и задачи</li>
+                <li>Внутренние задачи команды</li>
+                <li>Аналитика по заявкам</li>
+                <li>Архив документов</li>
+                <li>Техническая поддержка</li>
+              </ul>
+              <button
+                type="button"
+                class="btn btn--primary price-card__cta price-card__cta--light"
+                data-lead-open
+                data-tariff="full_access"
+              >
+                Подключить
+              </button>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section" id="faq">
+        <div class="container container--narrow">
+          <header class="section-head">
+            <h2>Частые вопросы</h2>
+          </header>
+          <div class="faq" id="faqList">
+            <details class="faq-item">
+              <summary>Что такое ДомДиспетчер?</summary>
+              <div class="faq-item__panel">
+                <div class="faq-item__content">
+                  <p>
+                    Платформа для управляющих компаний: заявки жителей, дома, чаты MAX, задачи и
+                    аналитика. AI-бот автоматически заводит обращения из сообщений в группах.
+                  </p>
+                </div>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>Нужен ли отдельный сервер для бота?</summary>
+              <div class="faq-item__panel">
+                <div class="faq-item__content">
+                  <p>
+                    Нет. MAX-бот встроен в backend приложения. Webhook принимает сообщения, AI
+                    классифицирует их, заявка создаётся в той же системе.
+                  </p>
+                </div>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>Что если житель задаёт обычный вопрос?</summary>
+              <div class="faq-item__panel">
+                <div class="faq-item__content">
+                  <p>
+                    Бот опирается на FAQ вашей УК и отвечает без создания заявки. В заявки попадают
+                    только реальные проблемы.
+                  </p>
+                </div>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>Где посмотреть рабочий кабинет?</summary>
+              <div class="faq-item__panel">
+                <div class="faq-item__content">
+                  <p>
+                    На
+                    <a href="https://domcrm.tech" target="_blank" rel="noopener">domcrm.tech</a>
+                    — вход в кабинет.
+                  </p>
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta">
+        <div class="container cta__inner">
+          <h2>Начните диспетчеризацию без хаоса в чатах</h2>
+          <p>Подключите дома, добавьте бота в MAX и ведите заявки на канбане.</p>
+          <div class="hero__cta">
+            <a class="btn btn--outline-light btn--lg" href="#demo">Ещё раз демо</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <a class="brand brand--footer" href="#top">
+          <span class="brand__mark" aria-hidden="true">
+            <img src="public/favicon.svg" width="30" height="30" alt="" />
+          </span>
+          <span class="brand__text">Дом<span>Диспетчер</span></span>
+        </a>
+        <p>© <span id="year"></span> ДомДиспетчер · платформа диспетчеризации для УК</p>
+        <a href="https://domcrm.tech" target="_blank" rel="noopener">domcrm.tech</a>
+      </div>
+    </footer>
+
+    <div class="lead-modal" id="leadModal" hidden>
+      <div class="lead-modal__backdrop" data-lead-close></div>
+      <div
+        class="lead-modal__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="leadModalTitle"
+      >
+        <button type="button" class="lead-modal__close" data-lead-close aria-label="Закрыть">
+          ×
+        </button>
+
+        <div class="lead-modal__view" data-lead-view="form">
+          <p class="eyebrow">Заявка на тариф</p>
+          <h2 id="leadModalTitle">Оставьте контакты</h2>
+          <p class="lead-modal__lead">
+            Выбранный план: <strong id="leadTariffLabel">Пробный период</strong>. Мы свяжемся и
+            подскажем по подключению.
+          </p>
+
+          <form class="lead-form" id="leadForm" novalidate>
+            <input type="hidden" name="tariff" id="leadTariff" value="trial" />
+
+            <label class="lead-field">
+              <span>Имя</span>
+              <input type="text" name="name" id="leadName" autocomplete="name" required />
+              <em class="lead-field__error" data-error-for="name" hidden></em>
+            </label>
+
+            <label class="lead-field">
+              <span>Компания / УК</span>
+              <input
+                type="text"
+                name="company"
+                id="leadCompany"
+                autocomplete="organization"
+                required
+              />
+              <em class="lead-field__error" data-error-for="company" hidden></em>
+            </label>
+
+            <label class="lead-field">
+              <span>Телефон</span>
+              <input
+                type="tel"
+                name="phone"
+                id="leadPhone"
+                autocomplete="tel"
+                placeholder="+7 900 000-00-00"
+                required
+              />
+              <em class="lead-field__error" data-error-for="phone" hidden></em>
+            </label>
+
+            <label class="lead-field">
+              <span>Email</span>
+              <input type="email" name="email" id="leadEmail" autocomplete="email" required />
+              <em class="lead-field__error" data-error-for="email" hidden></em>
+            </label>
+
+            <button type="submit" class="btn btn--primary lead-form__submit">
+              Отправить заявку
+            </button>
+            <p class="lead-form__note">только проверка формы</p>
+          </form>
+        </div>
+
+        <div class="lead-modal__view" data-lead-view="success" hidden>
+          <div class="lead-success">
+            <div class="lead-success__icon" aria-hidden="true">✓</div>
+            <h2>Заявка принята</h2>
+            <p>
+              Спасибо! Мы получили ваши контакты по тарифу
+              <strong id="leadSuccessTariff"></strong>.
+            </p>
+            <button type="button" class="btn btn--primary" data-lead-close>Хорошо</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
