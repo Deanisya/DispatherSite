@@ -129,16 +129,35 @@
 
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
+  function setNavOpen(open) {
+    siteNav?.classList.toggle("is-open", open);
+    navToggle?.setAttribute("aria-expanded", open ? "true" : "false");
+    document.body.classList.toggle("nav-open", open);
+  }
+
   navToggle?.addEventListener("click", () => {
-    const open = siteNav?.classList.toggle("is-open");
-    navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    const open = !siteNav?.classList.contains("is-open");
+    setNavOpen(open);
   });
 
   siteNav?.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
-      siteNav.classList.remove("is-open");
-      navToggle?.setAttribute("aria-expanded", "false");
+      setNavOpen(false);
     });
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!siteNav?.classList.contains("is-open")) return;
+    const target = e.target;
+    if (!(target instanceof Node)) return;
+    if (siteNav.contains(target) || navToggle?.contains(target)) return;
+    setNavOpen(false);
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 1024 && siteNav?.classList.contains("is-open")) {
+      setNavOpen(false);
+    }
   });
 
   function escapeHtml(str) {
@@ -470,6 +489,12 @@
   demoExpand?.addEventListener("click", () => setDemoExpanded(true));
   demoClose?.addEventListener("click", () => setDemoExpanded(false));
 
+  window.addEventListener("resize", () => {
+    if (window.innerWidth <= 720 && demoFrame?.classList.contains("is-expanded")) {
+      setDemoExpanded(false);
+    }
+  });
+
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Escape") return;
     if (drawer && !drawer.hidden) {
@@ -588,7 +613,7 @@
       const vb = svg.viewBox.baseVal;
       const vbX = vb.x || 0;
       const vbY = vb.y || 0;
-      const vbW = vb.width || 372;
+      const vbW = vb.width || 388;
       const vbH = vb.height || 120;
       const len = line.getTotalLength();
 
@@ -599,8 +624,15 @@
 
       function place(progress) {
         const pt = line.getPointAtLength(Math.min(1, progress) * len);
-        const x = ((pt.x - vbX) / vbW) * svg.clientWidth;
-        const y = ((pt.y - vbY) / vbH) * svg.clientHeight;
+        const pad = 6;
+        const x = Math.max(
+          pad,
+          Math.min(svg.clientWidth - pad, ((pt.x - vbX) / vbW) * svg.clientWidth)
+        );
+        const y = Math.max(
+          pad,
+          Math.min(svg.clientHeight - pad, ((pt.y - vbY) / vbH) * svg.clientHeight)
+        );
         dot.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0)`;
         line.style.strokeDasharray = String(len);
         line.style.strokeDashoffset = String(len * (1 - Math.min(1, progress)));
