@@ -60,7 +60,7 @@
       building: "ул. Ленина, 12",
       apt: "—",
       phone: "—",
-      assignee: "Дом Диспетчер",
+      assignee: "БотДиспетчер",
       category: "освещение",
       source: "MAX",
       created: "14.07 · 11:05",
