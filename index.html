@@ -29,11 +29,20 @@
         </a>
 
         <nav class="nav" id="nav" aria-label="Основная навигация">
-          <a href="#features">Возможности</a>
           <a href="#demo">Демо</a>
           <a href="#how">Как работает</a>
           <a href="#pricing">Тарифы</a>
           <a href="#faq">FAQ</a>
+          <a href="about.html">О компании</a>
+          <a href="rules.html">Правила чата</a>
+          <button
+            type="button"
+            class="btn btn--primary nav__cta"
+            data-lead-open
+            data-tariff="trial"
+          >
+            Попробовать
+          </button>
         </nav>
 
         <div class="header-actions">
@@ -3614,20 +3623,60 @@
     </main>
 
     <footer class="site-footer">
-      <div class="container footer-inner">
-        <a class="brand brand--footer" href="#top">
-          <span class="brand__mark" aria-hidden="true">
-            <img src="public/favicon.svg" width="30" height="30" alt="" />
-          </span>
-          <span class="brand__text">Дом<span>Диспетчер</span></span>
-        </a>
-        <p>
-          © <span id="year"></span> ДомДиспетчер · платформа диспетчеризации для
-          УК
-        </p>
-        <a href="https://domcrm.tech" target="_blank" rel="noopener"
-          >domcrm.tech</a
-        >
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a class="brand brand--footer" href="#top">
+              <span class="brand__mark" aria-hidden="true">
+                <img src="public/favicon.svg" width="30" height="30" alt="" />
+              </span>
+              <span class="brand__text">Дом<span>Диспетчер</span></span>
+            </a>
+            <p class="footer-brand__text">
+              Заявки из&nbsp;чатов MAX&nbsp;&mdash; сразу на&nbsp;доску
+              диспетчера. Без ручного переноса и&nbsp;потерянных обращений.
+            </p>
+            <div class="footer-brand__actions">
+              <a
+                class="btn btn--primary"
+                href="https://domcrm.tech"
+                target="_blank"
+                rel="noopener"
+                >Перейти на сайт</a
+              >
+            </div>
+          </div>
+
+          <div class="footer-cols">
+            <div class="footer-col">
+              <h3>Разделы</h3>
+              <a href="#demo">Демо</a>
+              <a href="#how">Как работает</a>
+              <a href="#pricing">Тарифы</a>
+              <a href="#faq">FAQ</a>
+            </div>
+            <div class="footer-col">
+              <h3>Компания</h3>
+              <a href="about.html">О компании</a>
+              <a href="rules.html">Правила чата</a>
+              <a href="https://domcrm.tech" target="_blank" rel="noopener"
+                >Кабинет</a
+              >
+            </div>
+            <div class="footer-col">
+              <h3>Контакты</h3>
+              <a href="https://domcrm.tech" target="_blank" rel="noopener"
+                >domcrm.tech</a
+              >
+              <a href="mailto:hello@domcrm.tech">hello@domcrm.tech</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© <span id="year"></span> ДомДиспетчер</p>
+          <p>Платформа диспетчеризации для УК</p>
+        </div>
       </div>
     </footer>
 

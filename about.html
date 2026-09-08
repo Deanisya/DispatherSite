@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>О компании — ДомДиспетчер</title>
+    <meta
+      name="description"
+      content="Кто мы, наша цель и продукты. ДомДиспетчер — AI-платформа диспетчеризации заявок для управляющих компаний."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="public/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/about.css" />
+  </head>
+  <body class="page-about">
+    <header class="site-header" id="top">
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="ДомДиспетчер">
+          <span class="brand__mark" aria-hidden="true">
+            <img src="public/favicon.svg" width="36" height="36" alt="" />
+          </span>
+          <span class="brand__text">Дом<span>Диспетчер</span></span>
+        </a>
+
+        <nav class="nav" id="nav" aria-label="Основная навигация">
+          <a href="index.html#demo">Демо</a>
+          <a href="index.html#pricing">Тарифы</a>
+          <a href="about.html" aria-current="page">О компании</a>
+          <a href="rules.html">Правила чата</a>
+          <button
+            type="button"
+            class="btn btn--primary nav__cta"
+            data-lead-open
+            data-tariff="trial"
+          >
+            Попробовать
+          </button>
+        </nav>
+
+        <div class="header-actions">
+          <button
+            type="button"
+            class="btn btn--primary"
+            data-lead-open
+            data-tariff="trial"
+          >
+            Попробовать
+          </button>
+          <button
+            class="nav-toggle"
+            id="navToggle"
+            type="button"
+            aria-label="Меню"
+            aria-expanded="false"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="about-hero">
+        <div class="container about-hero__inner">
+          <div class="about-hero__content">
+            <p class="about-hero__eyebrow">О компании</p>
+            <h1 class="about-hero__h1">
+              Заявки из&nbsp;чатов&nbsp;&mdash;<br />под контроль
+              диспетчера
+            </h1>
+            <p class="about-hero__lead">
+              Жители пишут в&nbsp;MAX&nbsp;&mdash; бот слышит, создаёт заявку
+              и&nbsp;сообщает номер. Диспетчер уже видит задачу с&nbsp;приоритетом.
+              Без ручного переноса и&nbsp;потерянных обращений.
+            </p>
+            <div class="about-hero__stats">
+              <div class="about-hero__stat">
+                <strong>92%</strong>
+                <span>заявок из&nbsp;MAX</span>
+              </div>
+              <div class="about-hero__stat">
+                <strong>~5&nbsp;с</strong>
+                <span>ответ AI</span>
+              </div>
+              <div class="about-hero__stat">
+                <strong>14&nbsp;дней</strong>
+                <span>бесплатно</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-hero__media">
+            <div class="about-hero__media-frame">
+              <img
+                src="public/панельзаявок.png"
+                alt="Панель заявок в кабинете ДомДиспетчер"
+                width="1280"
+                height="800"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="who">
+        <div class="container how">
+          <div class="how__content">
+            <header class="section-head section-head--left">
+              <p class="eyebrow">Кто мы</p>
+              <h2>Сделано теми, кто понимает, как работает УК</h2>
+            </header>
+            <p class="about-lead">
+              Мы&nbsp;построили ДомДиспетчер, потому что видели одну и&nbsp;ту&nbsp;же
+              картину: диспетчер разрывается между десятком чатов, жители не&nbsp;знают,
+              услышали ли их, а&nbsp;руководитель не&nbsp;может понять, сколько
+              заявок висит без ответа.
+            </p>
+            <p>
+              В&nbsp;ответ мы&nbsp;соединили мессенджер MAX, AI-распознавание
+              и&nbsp;рабочий кабинет в&nbsp;единую систему. Теперь весь путь
+              заявки&nbsp;&mdash; от&nbsp;сообщения жителя до&nbsp;отметки
+              «Выполнено»&nbsp;&mdash; проходит в&nbsp;одном месте.
+            </p>
+          </div>
+
+          <div class="about-quote" aria-hidden="true">
+            <blockquote>
+              «Диспетчер должен тратить время на&nbsp;решение проблем,
+              а&nbsp;не&nbsp;на&nbsp;поиск нужного сообщения в&nbsp;пяти чатах»
+            </blockquote>
+            <div class="about-quote__mark">ДомДиспетчер</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--muted" id="mission">
+        <div class="container">
+          <header class="section-head">
+            <p class="eyebrow">Наша цель</p>
+            <h2>Цифровой инструмент&nbsp;&mdash; доступный для любой УК</h2>
+            <p class="section-lead">
+              Не&nbsp;только крупные компании с&nbsp;IT-отделом заслуживают
+              нормальной автоматизации. ДомДиспетчер работает с&nbsp;первого
+              дня&nbsp;&mdash; без интеграторов, технических специалистов
+              и&nbsp;долгих внедрений.
+            </p>
+          </header>
+
+          <ol class="steps about-steps">
+            <li class="steps__item">
+              <span class="steps__icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm1 4v5.2l3.5 2.1-.8 1.3L11 13V7h2Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </span>
+              <div class="steps__body">
+                <h3>Запуск за&nbsp;один день</h3>
+                <p>
+                  Зарегистрировались, подключили чат дома в&nbsp;MAX,
+                  добавили бота&nbsp;&mdash; система работает. Никакой
+                  настройки серверов и&nbsp;ожидания разработчика.
+                </p>
+              </div>
+            </li>
+            <li class="steps__item">
+              <span class="steps__icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M4 6h16v12H4V6Zm2 2v2h3V8H6Zm5 0v2h7V8h-7Zm-5 4v2h5v-2H6Zm7 0v2h5v-2h-5Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </span>
+              <div class="steps__body">
+                <h3>Один мессенджер для всех домов</h3>
+                <p>
+                  Жители пишут в&nbsp;MAX&nbsp;&mdash; привычный
+                  и&nbsp;установленный. УК не&nbsp;просит скачивать
+                  отдельное приложение, а&nbsp;бот уже там.
+                </p>
+              </div>
+            </li>
+            <li class="steps__item">
+              <span class="steps__icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M4 18V6h2v12H4Zm4-7h3v7H8v-7Zm5-4h3v11h-3V7Zm5 2h3v9h-3V9Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </span>
+              <div class="steps__body">
+                <h3>Руководитель видит всё</h3>
+                <p>
+                  Сколько заявок открыто, какой дом отстаёт,
+                  где исполнитель не&nbsp;взял задачу&nbsp;&mdash; кабинет
+                  показывает это без звонков и&nbsp;утренних планёрок.
+                </p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="products">
+        <div class="container">
+          <header class="section-head">
+            <p class="eyebrow">Наши продукты</p>
+            <h2>Что входит в&nbsp;ДомДиспетчер</h2>
+            <p class="section-lead">
+              Три модуля, которые закрывают разные задачи УК&nbsp;&mdash;
+              и&nbsp;работают как единое целое с&nbsp;первого дня.
+            </p>
+          </header>
+
+          <div class="about-products">
+            <article class="about-product about-product--main">
+              <div class="about-product__head">
+                <span class="about-product__tag">Основной продукт</span>
+                <h3>ДомДиспетчер</h3>
+              </div>
+              <p>
+                Веб-кабинет для диспетчера и&nbsp;руководителя УК. Заявки
+                из&nbsp;чатов жителей, команда исполнителей, аналитика
+                по&nbsp;домам и&nbsp;архив документов&nbsp;&mdash; всё
+                на&nbsp;<a href="https://domcrm.tech" target="_blank" rel="noopener"
+                  >domcrm.tech</a>.
+              </p>
+              <ul class="about-product__tags">
+                <li>Канбан заявок</li>
+                <li>Дома и сотрудники</li>
+                <li>Аналитика</li>
+                <li>Документы</li>
+              </ul>
+            </article>
+
+            <article class="about-product">
+              <div class="about-product__icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M7.5 3.5 9 8l4.5 1.5L9 11 7.5 15.5 6 11 1.5 9.5 6 8l1.5-4.5Zm9 5L18 12l3.5 1.5L18 15l-1.5 4.5L15 15l-3.5-1.5L15 12l1.5-3.5Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <h3>AI-бот в&nbsp;MAX</h3>
+              <p>
+                Читает сообщения в&nbsp;чате дома, отличает жалобу
+                от&nbsp;вопроса, заводит заявку и&nbsp;сообщает жителю
+                номер. Типовые вопросы закрывает сам через FAQ.
+              </p>
+            </article>
+
+            <article class="about-product">
+              <div class="about-product__icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M4 6h16v12H4V6Zm2 2v2h3V8H6Zm5 0v2h7V8h-7Zm-5 4v2h5v-2H6Zm7 0v2h5v-2h-5Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <h3>Кабинет УК</h3>
+              <p>
+                Дашборд, заявки, чаты, календарь, задачи и&nbsp;отчёты&nbsp;&mdash;
+                рабочее место диспетчера и&nbsp;руководителя.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="about-benefits" id="benefits">
+        <div class="container">
+          <header class="section-head">
+            <p class="eyebrow about-benefits__eyebrow">Польза для УК</p>
+            <h2>Чем мы&nbsp;полезны управляющей компании</h2>
+            <p class="section-lead about-benefits__lead">
+              Четыре ключевые задачи, которые ДомДиспетчер снимает
+              в&nbsp;ежедневной работе управляющей компании.
+            </p>
+          </header>
+
+          <div class="about-benefits__grid">
+            <article class="about-benefit about-benefit--blue">
+              <div class="about-benefit__icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm1 4v5.2l3.5 2.1-.8 1.3L11 13V7h2Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <h3>Ни одна заявка не&nbsp;теряется</h3>
+              <p>
+                Каждое обращение из&nbsp;MAX фиксируется. Чаты привязаны
+                к&nbsp;домам&nbsp;&mdash; объекты не&nbsp;смешиваются.
+              </p>
+            </article>
+            <article class="about-benefit about-benefit--amber">
+              <div class="about-benefit__icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M4 6h16v12H4V6Zm2 2v2h3V8H6Zm5 0v2h7V8h-7Zm-5 4v2h5v-2H6Zm7 0v2h5v-2h-5Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <h3>Меньше нагрузки на&nbsp;диспетчера</h3>
+              <p>
+                AI&nbsp;отвечает на&nbsp;FAQ и&nbsp;отсеивает нерелевантное.
+                Диспетчер работает с&nbsp;реальными проблемами.
+              </p>
+            </article>
+            <article class="about-benefit about-benefit--green">
+              <div class="about-benefit__icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M7 4h10a2 2 0 0 1 2 2v14l-7-3-7 3V6a2 2 0 0 1 2-2Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <h3>Быстрый ответ жителю</h3>
+              <p>
+                Бот сразу даёт номер заявки&nbsp;&mdash; житель видит,
+                что обращение принято.
+              </p>
+            </article>
+            <article class="about-benefit about-benefit--rose">
+              <div class="about-benefit__icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M4 18V6h2v12H4Zm4-7h3v7H8v-7Zm5-4h3v11h-3V7Zm5 2h3v9h-3V9Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <h3>Масштаб на&nbsp;десятки домов</h3>
+              <p>
+                Дашборд по&nbsp;всем объектам, аналитика входящих
+                и&nbsp;закрытых заявок по&nbsp;периодам.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a class="brand brand--footer" href="index.html">
+              <span class="brand__mark" aria-hidden="true">
+                <img src="public/favicon.svg" width="30" height="30" alt="" />
+              </span>
+              <span class="brand__text">Дом<span>Диспетчер</span></span>
+            </a>
+            <p class="footer-brand__text">
+              Заявки из&nbsp;чатов MAX&nbsp;&mdash; сразу на&nbsp;доску
+              диспетчера. Без ручного переноса и&nbsp;потерянных обращений.
+            </p>
+            <div class="footer-brand__actions">
+              <a
+                class="btn btn--primary"
+                href="https://domcrm.tech"
+                target="_blank"
+                rel="noopener"
+                >Перейти на сайт</a
+              >
+            </div>
+          </div>
+
+          <div class="footer-cols">
+            <div class="footer-col">
+              <h3>Разделы</h3>
+              <a href="index.html#demo">Демо</a>
+              <a href="index.html#how">Как работает</a>
+              <a href="index.html#pricing">Тарифы</a>
+              <a href="index.html#faq">FAQ</a>
+            </div>
+            <div class="footer-col">
+              <h3>Компания</h3>
+              <a href="about.html">О компании</a>
+              <a href="rules.html">Правила чата</a>
+              <a href="https://domcrm.tech" target="_blank" rel="noopener"
+                >Кабинет</a
+              >
+            </div>
+            <div class="footer-col">
+              <h3>Контакты</h3>
+              <a href="https://domcrm.tech" target="_blank" rel="noopener"
+                >domcrm.tech</a
+              >
+              <a href="mailto:hello@domcrm.tech">hello@domcrm.tech</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© <span id="year"></span> ДомДиспетчер</p>
+          <p>Платформа диспетчеризации для УК</p>
+        </div>
+      </div>
+    </footer>
+
+    <div class="lead-modal" id="leadModal" hidden>
+      <div class="lead-modal__backdrop" data-lead-close></div>
+      <div
+        class="lead-modal__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="leadModalTitle"
+      >
+        <button
+          type="button"
+          class="lead-modal__close"
+          data-lead-close
+          aria-label="Закрыть"
+        >
+          ×
+        </button>
+
+        <div class="lead-modal__view" data-lead-view="form">
+          <p class="eyebrow">Заявка на тариф</p>
+          <h2 id="leadModalTitle">Оставьте контакты</h2>
+          <p class="lead-modal__lead">
+            Выбранный план:
+            <strong id="leadTariffLabel">Пробный период</strong>.
+            Мы&nbsp;свяжемся и подскажем по&nbsp;подключению.
+          </p>
+
+          <form class="lead-form" id="leadForm" novalidate>
+            <input type="hidden" name="tariff" id="leadTariff" value="trial" />
+
+            <label class="lead-field">
+              <span>Имя</span>
+              <input
+                type="text"
+                name="name"
+                id="leadName"
+                autocomplete="name"
+                required
+              />
+              <em class="lead-field__error" data-error-for="name" hidden></em>
+            </label>
+
+            <label class="lead-field">
+              <span>Телефон</span>
+              <input
+                type="tel"
+                name="phone"
+                id="leadPhone"
+                autocomplete="tel"
+                required
+              />
+              <em class="lead-field__error" data-error-for="phone" hidden></em>
+            </label>
+
+            <label class="lead-field">
+              <span>Email</span>
+              <input
+                type="email"
+                name="email"
+                id="leadEmail"
+                autocomplete="email"
+                required
+              />
+              <em class="lead-field__error" data-error-for="email" hidden></em>
+            </label>
+
+            <button type="submit" class="btn btn--primary lead-form__submit">
+              Отправить заявку
+            </button>
+            <p class="lead-form__note">только проверка формы</p>
+          </form>
+        </div>
+
+        <div class="lead-modal__view" data-lead-view="success" hidden>
+          <div class="lead-success">
+            <div class="lead-success__icon" aria-hidden="true">✓</div>
+            <h2>Заявка принята</h2>
+            <p>
+              Спасибо! Мы получили ваши контакты по тарифу
+              <strong id="leadSuccessTariff"></strong>.
+            </p>
+            <button type="button" class="btn btn--primary" data-lead-close>
+              Хорошо
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>

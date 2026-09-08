@@ -140,7 +140,7 @@
     setNavOpen(open);
   });
 
-  siteNav?.querySelectorAll("a").forEach((link) => {
+  siteNav?.querySelectorAll("a, button").forEach((link) => {
     link.addEventListener("click", () => {
       setNavOpen(false);
     });
@@ -956,5 +956,33 @@
       }
       setView("success");
     });
+  })();
+
+  /* Feature cards: staggered reveal on scroll */
+  (() => {
+    const grid = document.querySelector(".feature-grid");
+    if (!grid) return;
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    grid.classList.add("feature-grid--reveal");
+
+    if (reduceMotion) {
+      grid.classList.add("is-inview");
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        grid.classList.add("is-inview");
+        io.disconnect();
+      },
+      { threshold: 0.18, rootMargin: "0px 0px -8% 0px" }
+    );
+
+    io.observe(grid);
   })();
 })();

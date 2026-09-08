@@ -1,0 +1,278 @@
+/* ============================================================
+   ДомДиспетчер — Правила чата (docs layout, NestJS-style)
+   Ref: https://docs.nestjs.com/
+   ============================================================ */
+
+.page-rules {
+  background: var(--neutral-25);
+}
+
+.page-rules .rules-shell {
+  padding: 2rem 0 4.5rem;
+}
+
+.page-rules .rules-shell__inner {
+  width: min(100% - 2.5rem, var(--max));
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: start;
+}
+
+/* ---- Left rail (On this page) ---- */
+.page-rules .rules-rail {
+  position: sticky;
+  top: calc(var(--header-h) + 1.25rem);
+  padding-top: 0.25rem;
+}
+
+.page-rules .rules-rail__title {
+  margin: 0 0 0.85rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--neutral-500);
+}
+
+.page-rules .rules-rail__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  border-left: 1px solid var(--neutral-200);
+}
+
+.page-rules .rules-rail__nav a {
+  display: block;
+  padding: 0.4rem 0 0.4rem 0.9rem;
+  margin-left: -1px;
+  border-left: 2px solid transparent;
+  color: var(--neutral-600);
+  text-decoration: none;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.page-rules .rules-rail__nav a:hover {
+  color: var(--hd-blue-600);
+  border-left-color: var(--hd-blue-400);
+}
+
+.page-rules .rules-rail__nav a.is-active {
+  color: var(--hd-blue-600);
+  font-weight: 600;
+  border-left-color: var(--hd-blue-600);
+}
+
+/* ---- Main content ---- */
+.page-rules .rules-content {
+  min-width: 0;
+  padding-bottom: 1rem;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--neutral-700);
+  -webkit-font-smoothing: antialiased;
+}
+
+.page-rules .rules-content__header {
+  margin-bottom: 2.75rem;
+}
+
+.page-rules .rules-content__eyebrow {
+  margin: 0 0 0.85rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--hd-blue-600);
+}
+
+.page-rules .rules-content__header h1 {
+  margin: 0 0 0.85rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--neutral-900);
+}
+
+.page-rules .rules-content__lead {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--neutral-600);
+}
+
+.page-rules .rules-section {
+  margin: 0 0 2.75rem;
+  scroll-margin-top: calc(var(--header-h) + 1.25rem);
+}
+
+.page-rules .rules-section h2 {
+  margin: 0 0 1.1rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  color: var(--neutral-900);
+}
+
+.page-rules .rules-section h3 {
+  margin: 1.65rem 0 0.65rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--neutral-900);
+}
+
+.page-rules .rules-section p {
+  margin: 0 0 1rem;
+}
+
+.page-rules .rules-section strong {
+  color: var(--neutral-900);
+  font-weight: 600;
+}
+
+.page-rules .rules-section ul {
+  margin: 0.4rem 0 1.15rem;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.page-rules .rules-section li {
+  line-height: 1.65;
+}
+
+.page-rules .rules-section a {
+  color: var(--hd-blue-600);
+  text-decoration: none;
+  word-break: break-word;
+}
+
+.page-rules .rules-section a:hover {
+  text-decoration: underline;
+}
+
+/* NestJS-style info callout */
+.page-rules .rules-note {
+  margin: 1.35rem 0;
+  padding: 1.15rem 1.25rem;
+  background: rgba(37, 83, 224, 0.04);
+  border: 1px solid rgba(37, 83, 224, 0.14);
+  border-left: 4px solid var(--hd-blue-500);
+  border-radius: 12px;
+  line-height: 1.6;
+}
+
+.page-rules .rules-note p {
+  margin: 0;
+  color: var(--neutral-800);
+}
+
+.page-rules .rules-note strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--hd-blue-600);
+}
+
+.page-rules .nav a[aria-current="page"] {
+  color: var(--hd-blue-600);
+}
+
+@media (max-width: 960px) {
+  .page-rules .rules-shell {
+    padding: 1.5rem 0 3.5rem;
+  }
+
+  .page-rules .rules-shell__inner {
+    width: min(100% - 2rem, var(--max));
+    grid-template-columns: 1fr;
+    gap: 1.35rem;
+  }
+
+  .page-rules .rules-rail {
+    position: static;
+    padding: 1rem 1.1rem;
+    background: #fff;
+    border: 1px solid var(--neutral-200);
+    border-radius: 12px;
+  }
+
+  .page-rules .rules-rail__nav {
+    border-left: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+
+  .page-rules .rules-rail__nav a {
+    margin-left: 0;
+    padding: 0.55rem 0;
+    border-left: 0;
+    border-bottom: 1px solid var(--neutral-100);
+  }
+
+  .page-rules .rules-rail__nav a:last-child {
+    border-bottom: none;
+  }
+
+  .page-rules .rules-rail__nav a.is-active {
+    border-left: 0;
+    color: var(--hd-blue-600);
+  }
+}
+
+@media (max-width: 720px) {
+  .page-rules .rules-shell__inner {
+    width: min(100% - 1.5rem, var(--max));
+  }
+
+  .page-rules .rules-content {
+    font-size: 15px;
+  }
+
+  .page-rules .rules-content__header {
+    margin-bottom: 2rem;
+  }
+
+  .page-rules .rules-section {
+    margin-bottom: 2.15rem;
+  }
+
+  .page-rules .rules-note {
+    padding: 1rem 1.05rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-rules .rules-shell {
+    padding: 1.15rem 0 3rem;
+  }
+
+  .page-rules .rules-shell__inner {
+    width: min(100% - 1.25rem, var(--max));
+  }
+
+  .page-rules .rules-content__header h1 {
+    font-size: 1.25rem;
+  }
+
+  .page-rules .rules-section h2 {
+    font-size: 1.12rem;
+  }
+
+  .page-rules .rules-section ul {
+    padding-left: 1.05rem;
+  }
+}
