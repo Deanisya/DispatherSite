@@ -29,12 +29,10 @@
         </a>
 
         <nav class="nav" id="nav" aria-label="Основная навигация">
-          <a href="#demo">Демо</a>
-          <a href="#how">Как работает</a>
-          <a href="#pricing">Тарифы</a>
-          <a href="#faq">FAQ</a>
-          <a href="about.html">О компании</a>
+          <a href="index.html" aria-current="page">Главная</a>
           <a href="rules.html">Правила чата</a>
+          <a href="privacy-policy.html">Политика ПД</a>
+          <a href="user-agreement.html">Соглашение</a>
           <button
             type="button"
             class="btn btn--primary nav__cta"
@@ -224,8 +222,8 @@
           <header class="section-head">
             <h2>Все заявки УК&nbsp;&mdash; в&nbsp;одном месте</h2>
             <p class="section-lead">
-              От&nbsp;сообщения в&nbsp;чате до&nbsp;закрытой заявки&nbsp;&mdash;
-              без ручного переноса и потерянных обращений.
+              От&nbsp;сообщения в&nbsp;чате или личке до&nbsp;закрытой
+              заявки&nbsp;&mdash; без ручного переноса и потерянных обращений.
             </p>
           </header>
 
@@ -241,8 +239,8 @@
               </div>
               <h3>Канбан заявок</h3>
               <p>
-                Статусы, приоритеты, дубли и&nbsp;критичные
-                обращения&nbsp;&mdash; на&nbsp;одной доске.
+                Статусы, приоритеты и&nbsp;критичные обращения&nbsp;&mdash;
+                на&nbsp;одной доске.
               </p>
             </article>
             <article class="feature">
@@ -256,8 +254,9 @@
               </div>
               <h3>AI-бот в MAX</h3>
               <p>
-                Классифицирует проблему, создаёт заявку и&nbsp;отвечает жителю
-                номером обращения.
+                В&nbsp;чате дома и&nbsp;в&nbsp;личке: заявки, FAQ, услуги,
+                аварии. <br />Непонятное&nbsp;&mdash; диспетчеру,
+                спам&nbsp;&mdash;&nbsp;отсекает.
               </p>
             </article>
             <article class="feature">
@@ -288,6 +287,51 @@
               <p>
                 База типовых ответов: бот закрывает рутину, диспетчер работает с
                 реальными проблемами.
+              </p>
+            </article>
+            <article class="feature">
+              <div class="feature__icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M7 7h10v2H7V7Zm0 4h10v2H7v-2Zm0 4h7v2H7v-2ZM5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <h3>Платные услуги</h3>
+              <p>
+                Каталог услуг УК: житель заказывает из&nbsp;лички MAX или mini
+                app&nbsp;&mdash; заявка сразу в&nbsp;кабинете.
+              </p>
+            </article>
+            <article class="feature">
+              <div class="feature__icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 3 3 7v2h18V7L12 3Zm-7 8v7h2v-7H5Zm5 0v7h2v-7h-2Zm5 0v7h2v-7h-2ZM3 20h18v2H3v-2Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <h3>Плановые и аварии</h3>
+              <p>
+                Объявления о&nbsp;работах в&nbsp;чаты домов и&nbsp;шаблоны
+                аварийных ответов&nbsp;&mdash; бот отвечает по&nbsp;сценарию.
+              </p>
+            </article>
+            <article class="feature">
+              <div class="feature__icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 22a2.5 2.5 0 0 0 2.45-2h-4.9A2.5 2.5 0 0 0 12 22Zm6-6V11a6 6 0 1 0-12 0v5l-2 2v1h16v-1l-2-2Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <h3>Уведомления</h3>
+              <p>
+                Админ-чат MAX и&nbsp;email о&nbsp;новых заявках. Настройка
+                уверенности бота&nbsp;&mdash; когда звать диспетчера.
               </p>
             </article>
             <article class="feature">
@@ -3659,23 +3703,26 @@
               <h3>Компания</h3>
               <a href="about.html">О компании</a>
               <a href="rules.html">Правила чата</a>
+              <a href="privacy-policy.html">Политика ПД</a>
+              <a href="user-agreement.html">Соглашение</a>
               <a href="https://domcrm.tech" target="_blank" rel="noopener"
                 >Кабинет</a
               >
             </div>
             <div class="footer-col">
               <h3>Контакты</h3>
-              <a href="https://domcrm.tech" target="_blank" rel="noopener"
-                >domcrm.tech</a
-              >
-              <a href="mailto:hello@domcrm.tech">hello@domcrm.tech</a>
+              <a href="mailto:domcrm.tech@mail.ru">domcrm.tech@mail.ru</a>
             </div>
           </div>
         </div>
 
         <div class="footer-bottom">
-          <p>© <span id="year"></span> БотДиспетчер</p>
-          <p>Платформа диспетчеризации для УК</p>
+          <p>© ООО «Городская метрологическая служба» | Бот Диспетчер</p>
+          <nav class="footer-legal" aria-label="Юридические документы">
+            <a href="privacy-policy.html">Политика обработки ПД</a>
+            <span aria-hidden="true">·</span>
+            <a href="user-agreement.html">Пользовательское соглашение</a>
+          </nav>
         </div>
       </div>
     </footer>
@@ -3766,6 +3813,12 @@
               Отправить заявку
             </button>
             <p class="lead-form__note">только проверка формы</p>
+            <p class="lead-form__privacy">
+              Отправляя заявку, вы соглашаетесь с
+              <a href="privacy-policy.html">Политикой обработки ПД</a>
+              и
+              <a href="user-agreement.html">Пользовательским соглашением</a>.
+            </p>
           </form>
         </div>
 

@@ -20,6 +20,15 @@
   align-items: start;
 }
 
+.page-rules .rules-shell__inner:has(.rules-rail[hidden]) {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.page-rules .rules-shell__inner:has(.rules-rail[hidden]) .rules-content {
+  max-width: 46rem;
+  margin-inline: auto;
+}
+
 /* ---- Left rail (On this page) ---- */
 .page-rules .rules-rail {
   position: sticky;
@@ -69,7 +78,8 @@
 /* ---- Main content ---- */
 .page-rules .rules-content {
   min-width: 0;
-  padding-bottom: 1rem;
+  /* Room so penultimate TOC anchors can scroll into view */
+  padding-bottom: min(18vh, 8rem);
   font-size: 15px;
   line-height: 1.7;
   color: var(--neutral-700);

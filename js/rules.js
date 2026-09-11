@@ -29,23 +29,37 @@
     return (header?.offsetHeight || 72) + 24;
   };
 
+  let lockedLink = null;
+  let lockTimer = 0;
+
   const updateFromScroll = () => {
+    if (lockedLink) {
+      setActive(lockedLink);
+      return;
+    }
+
     const y = window.scrollY + headerOffset();
     let current = sections[0];
 
     for (const item of sections) {
-      if (item.el.offsetTop <= y) current = item;
+      if (item.el.offsetTop <= y + 2) current = item;
       else break;
     }
 
-    // Near bottom: keep last section active
-    const atBottom =
-      window.innerHeight + window.scrollY >=
-      document.documentElement.scrollHeight - 8;
-    if (atBottom) current = sections[sections.length - 1];
-
     setActive(current.link);
   };
+
+  links.forEach((link) => {
+    link.addEventListener("click", () => {
+      lockedLink = link;
+      setActive(link);
+      window.clearTimeout(lockTimer);
+      lockTimer = window.setTimeout(() => {
+        lockedLink = null;
+        updateFromScroll();
+      }, 600);
+    });
+  });
 
   let ticking = false;
   window.addEventListener(
