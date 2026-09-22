@@ -475,12 +475,29 @@
             </label>
 
             <label class="lead-field">
+              <span>Компания / УК</span>
+              <input
+                type="text"
+                name="company"
+                id="leadCompany"
+                autocomplete="organization"
+                required
+              />
+              <em
+                class="lead-field__error"
+                data-error-for="company"
+                hidden
+              ></em>
+            </label>
+
+            <label class="lead-field">
               <span>Телефон</span>
               <input
                 type="tel"
                 name="phone"
                 id="leadPhone"
                 autocomplete="tel"
+                placeholder="+7 900 000-00-00"
                 required
               />
               <em class="lead-field__error" data-error-for="phone" hidden></em>

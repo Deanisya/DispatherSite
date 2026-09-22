@@ -875,14 +875,20 @@
       if (successView) successView.hidden = isForm;
     }
 
+    function clearFieldError(name) {
+      const input = fields[name];
+      const field = input?.closest(".lead-field");
+      const error = form.querySelector(`[data-error-for="${name}"]`);
+      if (field) field.classList.remove("is-invalid");
+      if (input) input.removeAttribute("aria-invalid");
+      if (error) {
+        error.hidden = true;
+        error.textContent = "";
+      }
+    }
+
     function clearErrors() {
-      form.querySelectorAll(".lead-field").forEach((field) => {
-        field.classList.remove("is-invalid");
-      });
-      form.querySelectorAll(".lead-field__error").forEach((el) => {
-        el.hidden = true;
-        el.textContent = "";
-      });
+      Object.keys(fields).forEach(clearFieldError);
       if (formNote) {
         formNote.textContent = defaultNote;
         formNote.classList.remove("lead-form__note--error");
@@ -894,6 +900,7 @@
       const field = input?.closest(".lead-field");
       const error = form.querySelector(`[data-error-for="${name}"]`);
       if (field) field.classList.add("is-invalid");
+      if (input) input.setAttribute("aria-invalid", "true");
       if (error) {
         error.hidden = false;
         error.textContent = message;
@@ -923,34 +930,112 @@
       return `+7${national}`;
     }
 
+    function formatPhoneInput(raw) {
+      let digits = String(raw || "").replace(/\D/g, "");
+      if (!digits) return "";
+
+      if (digits.startsWith("8")) digits = "7" + digits.slice(1);
+      if (!digits.startsWith("7")) digits = "7" + digits;
+      digits = digits.slice(0, 11);
+
+      const rest = digits.slice(1);
+      let formatted = "+7";
+      if (rest.length > 0) formatted += " " + rest.slice(0, 3);
+      if (rest.length > 3) formatted += " " + rest.slice(3, 6);
+      if (rest.length > 6) formatted += "-" + rest.slice(6, 8);
+      if (rest.length > 8) formatted += "-" + rest.slice(8, 10);
+      return formatted;
+    }
+
+    function fieldError(name) {
+      const value = fields[name]?.value.trim() || "";
+
+      if (name === "name") {
+        if (!value) return "Укажите имя";
+        if (value.length < 2) return "Укажите имя (минимум 2 символа)";
+        return "";
+      }
+      if (name === "company") {
+        if (!value) return "Укажите название компании";
+        if (value.length < 2) return "Укажите название компании";
+        return "";
+      }
+      if (name === "phone") {
+        if (!value) return "Укажите телефон";
+        if (!normalizePhone(value)) return "Телефон в формате +7 9XX XXX-XX-XX";
+        return "";
+      }
+      if (name === "email") {
+        if (!value) return "Укажите email";
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          return "Введите корректный email";
+        }
+        return "";
+      }
+      return "";
+    }
+
+    function validateField(name, { force = false } = {}) {
+      const input = fields[name];
+      if (!input) return true;
+
+      const value = input.value.trim();
+      const wasInvalid = input.closest(".lead-field")?.classList.contains(
+        "is-invalid"
+      );
+
+      // Empty: clear until blur/submit unless already marked invalid
+      if (!value && !force && !wasInvalid) {
+        clearFieldError(name);
+        return true;
+      }
+
+      const message = fieldError(name);
+      if (message) {
+        showError(name, message);
+        return false;
+      }
+      clearFieldError(name);
+      return true;
+    }
+
     function validate() {
-      clearErrors();
       let ok = true;
+      let firstInvalid = null;
 
-      const name = fields.name?.value.trim() || "";
-      const company = fields.company?.value.trim() || "";
-      const phone = fields.phone?.value.trim() || "";
-      const email = fields.email?.value.trim() || "";
+      Object.keys(fields).forEach((name) => {
+        const fieldOk = validateField(name, { force: true });
+        if (!fieldOk) {
+          ok = false;
+          if (!firstInvalid) firstInvalid = fields[name];
+        }
+      });
 
-      if (name.length < 2) {
-        showError("name", "Укажите имя (минимум 2 символа)");
-        ok = false;
-      }
-      if (company.length < 2) {
-        showError("company", "Укажите название компании");
-        ok = false;
-      }
-      if (!normalizePhone(phone)) {
-        showError("phone", "Телефон в формате +7 9XX XXX-XX-XX");
-        ok = false;
-      }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showError("email", "Введите корректный email");
-        ok = false;
-      }
-
+      if (firstInvalid) firstInvalid.focus();
       return ok;
     }
+
+    Object.entries(fields).forEach(([name, input]) => {
+      if (!input) return;
+
+      input.addEventListener("blur", () => {
+        validateField(name, { force: true });
+      });
+
+      input.addEventListener("input", () => {
+        if (name === "phone") {
+          const formatted = formatPhoneInput(input.value);
+          if (input.value !== formatted) {
+            input.value = formatted;
+          }
+        }
+
+        const field = input.closest(".lead-field");
+        if (field?.classList.contains("is-invalid")) {
+          validateField(name);
+        }
+      });
+    });
 
     function setSubmitting(busy) {
       if (!submitBtn) return;
@@ -1039,12 +1124,17 @@
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      if (formNote) {
+        formNote.textContent = defaultNote;
+        formNote.classList.remove("lead-form__note--error");
+      }
       if (!validate() || submitBtn?.disabled) return;
 
       const tariff = tariffInput?.value || "trial";
       const phone = normalizePhone(fields.phone.value);
       if (!phone) {
         showError("phone", "Телефон в формате +7 9XX XXX-XX-XX");
+        fields.phone?.focus();
         return;
       }
 
