@@ -819,18 +819,42 @@
     });
   })();
 
-  /* Lead modal — tariff CTA form stub */
+  /* Lead modal → AiDispather /api/leads */
   (function initLeadModal() {
     const modal = document.getElementById("leadModal");
     const form = document.getElementById("leadForm");
     if (!modal || !form) return;
 
+    /** Override: <meta name="leads-api-base" content="https://…/api"> or window.LEADS_API_BASE */
+    const metaApi = document
+      .querySelector('meta[name="leads-api-base"]')
+      ?.getAttribute("content")
+      ?.trim();
+    const host = window.location.hostname;
+    const isLocalHost =
+      host === "localhost" ||
+      host === "127.0.0.1" ||
+      window.location.protocol === "file:";
+    const defaultApi = isLocalHost
+      ? "http://localhost:4000/api"
+      : "https://test.domcrm.tech/api";
+    const LEADS_API_BASE = (
+      window.LEADS_API_BASE ||
+      metaApi ||
+      defaultApi
+    ).replace(/\/$/, "");
+
     const formView = modal.querySelector('[data-lead-view="form"]');
     const successView = modal.querySelector('[data-lead-view="success"]');
     const tariffInput = document.getElementById("leadTariff");
-    const tariffLabel = document.getElementById("leadTariffLabel");
+    const tariffLabels = modal.querySelectorAll(
+      "#leadTariffLabel, [data-lead-tariff-label]"
+    );
     const successTariff = document.getElementById("leadSuccessTariff");
+    const submitBtn = form.querySelector(".lead-form__submit");
+    const formNote = form.querySelector(".lead-form__note");
     const openers = document.querySelectorAll("[data-lead-open]");
+    const defaultNote = formNote?.textContent || "";
 
     const TARIFF_LABELS = {
       trial: "Пробный период",
@@ -859,6 +883,10 @@
         el.hidden = true;
         el.textContent = "";
       });
+      if (formNote) {
+        formNote.textContent = defaultNote;
+        formNote.classList.remove("lead-form__note--error");
+      }
     }
 
     function showError(name, message) {
@@ -870,6 +898,29 @@
         error.hidden = false;
         error.textContent = message;
       }
+    }
+
+    function showFormError(message) {
+      if (!formNote) {
+        window.alert(message);
+        return;
+      }
+      formNote.textContent = message;
+      formNote.classList.add("lead-form__note--error");
+    }
+
+    /** Same rules as AiDispather normalizePhone → +79XXXXXXXXX */
+    function normalizePhone(raw) {
+      const digits = String(raw || "").replace(/\D/g, "");
+      let national = digits;
+      if (
+        national.length === 11 &&
+        (national.startsWith("7") || national.startsWith("8"))
+      ) {
+        national = national.slice(1);
+      }
+      if (!/^9\d{9}$/.test(national)) return null;
+      return `+7${national}`;
     }
 
     function validate() {
@@ -889,9 +940,8 @@
         showError("company", "Укажите название компании");
         ok = false;
       }
-      const phoneDigits = phone.replace(/\D/g, "");
-      if (phoneDigits.length < 10) {
-        showError("phone", "Введите телефон полностью");
+      if (!normalizePhone(phone)) {
+        showError("phone", "Телефон в формате +7 9XX XXX-XX-XX");
         ok = false;
       }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -902,14 +952,63 @@
       return ok;
     }
 
+    function setSubmitting(busy) {
+      if (!submitBtn) return;
+      submitBtn.disabled = busy;
+      submitBtn.setAttribute("aria-busy", busy ? "true" : "false");
+      submitBtn.textContent = busy ? "Отправляем…" : "Отправить";
+    }
+
+    async function parseApiError(res) {
+      try {
+        const data = await res.json();
+        if (typeof data?.message === "string") return data.message;
+        if (Array.isArray(data?.message)) return data.message.join(". ");
+      } catch {
+        /* ignore */
+      }
+      if (res.status === 401 || res.status === 403) {
+        return "Сервер отклонил запрос. Нужна настройка публичного доступа на API.";
+      }
+      if (res.status === 503) {
+        return "Почта на сервере ещё не настроена. Попробуйте позже.";
+      }
+      return "Не удалось отправить заявку. Попробуйте позже.";
+    }
+
+    async function submitLead(tariffId, contacts) {
+      const isTrial = tariffId === "trial";
+      const path = isTrial ? "/leads/trial-request" : "/leads/tariff-request";
+      const body = isTrial
+        ? contacts
+        : {
+            ...contacts,
+            tariffId,
+            tariffName: TARIFF_LABELS[tariffId] || tariffId,
+          };
+
+      const res = await fetch(`${LEADS_API_BASE}${path}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(body),
+      });
+
+      if (!res.ok) {
+        throw new Error(await parseApiError(res));
+      }
+    }
+
     function openModal(tariffId) {
       const id = TARIFF_LABELS[tariffId] ? tariffId : "trial";
       if (tariffInput) tariffInput.value = id;
-      if (tariffLabel) tariffLabel.textContent = TARIFF_LABELS[id];
+      tariffLabels.forEach((el) => {
+        el.textContent = TARIFF_LABELS[id];
+      });
       if (successTariff) successTariff.textContent = TARIFF_LABELS[id];
       clearErrors();
       form.reset();
       if (tariffInput) tariffInput.value = id;
+      setSubmitting(false);
       setView("form");
       modal.hidden = false;
       document.body.classList.add("lead-modal-open");
@@ -920,6 +1019,7 @@
       modal.hidden = true;
       document.body.classList.remove("lead-modal-open");
       clearErrors();
+      setSubmitting(false);
       setView("form");
     }
 
@@ -937,24 +1037,41 @@
       if (e.key === "Escape" && !modal.hidden) closeModal();
     });
 
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      if (!validate()) return;
+      if (!validate() || submitBtn?.disabled) return;
 
-      // Stub submit — later replace with API call
-      const payload = {
-        tariff: tariffInput?.value || "trial",
+      const tariff = tariffInput?.value || "trial";
+      const phone = normalizePhone(fields.phone.value);
+      if (!phone) {
+        showError("phone", "Телефон в формате +7 9XX XXX-XX-XX");
+        return;
+      }
+
+      const contacts = {
         name: fields.name.value.trim(),
-        company: fields.company.value.trim(),
-        phone: fields.phone.value.trim(),
+        companyName: fields.company.value.trim(),
+        phone,
         email: fields.email.value.trim(),
       };
-      console.info("[lead stub]", payload);
 
-      if (successTariff) {
-        successTariff.textContent = TARIFF_LABELS[payload.tariff] || payload.tariff;
+      setSubmitting(true);
+      try {
+        await submitLead(tariff, contacts);
+        if (successTariff) {
+          successTariff.textContent = TARIFF_LABELS[tariff] || tariff;
+        }
+        if (typeof window.ym === "function") {
+          window.ym(112716961, "reachGoal", "zayavka_success");
+        }
+        setView("success");
+      } catch (err) {
+        showFormError(
+          err instanceof Error ? err.message : "Не удалось отправить заявку."
+        );
+      } finally {
+        setSubmitting(false);
       }
-      setView("success");
     });
   })();
 
